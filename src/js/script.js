@@ -1,4 +1,32 @@
 // Particles
+
+/* ── Smart Nav ── */
+(function () {
+  const nav = document.querySelector('nav');
+  let prevY = 0;
+
+  window.addEventListener('scroll', function () {
+    const currY = window.scrollY;
+
+    if (currY < 80) {
+      // At the very top — always show, clean state
+      nav.classList.remove('nav--hidden');
+      nav.classList.remove('nav--scrolled');
+
+    } else if (currY > prevY) {
+      // Scrolling DOWN — hide
+      nav.classList.add('nav--scrolled');
+      nav.classList.add('nav--hidden');
+
+    } else {
+      // Scrolling UP — show
+      nav.classList.add('nav--scrolled');
+      nav.classList.remove('nav--hidden');
+    }
+
+    prevY = currY;
+  }, { passive: true });
+})();
 const pc = document.getElementById('particles');
 if (pc) {
   for (let i = 0; i < 20; i++) {
