@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time & Attendance Management — SecureHub Smart Vision Technology</title>
+  <link rel="stylesheet" href="../src/css/service-page.css">
+  <link rel="icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <style>
+    /* ─────────────────────────────────────────
+       NAV / HAMBURGER
+    ───────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      background: none;
+      border: none;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      transition: all 0.35s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media(max-width:900px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 22, 40, 0.98);
+        backdrop-filter: blur(16px);
+        padding: 18px 24px 24px;
+        gap: 4px;
+        transform: translateY(-110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
+        z-index: 999;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+      }
+
+      .nav-cta {
+        margin-top: 8px;
+        text-align: center;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .service-hero {
+      min-height: 560px;
+      background: linear-gradient(135deg, #060e1f 0%, #0f1c38 45%, #0a1525 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(232, 114, 30, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 114, 30, 0.07) 1px, transparent 1px);
+      background-size: 52px 52px;
+      animation: gridShift 18s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 52px 52px;
+      }
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.18), transparent 65%);
+      top: -180px;
+      right: -120px;
+      animation: orbPulse 6s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(44, 62, 107, 0.7), transparent 70%);
+      bottom: -80px;
+      left: -80px;
+    }
+
+    .hero-orb-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.1), transparent 70%);
+      top: 50%;
+      left: 38%;
+      transform: translate(-50%, -50%);
+      animation: orbPulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .8;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+    .service-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--orange);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb .current {
+      color: var(--orange);
+    }
+
+    .service-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 114, 30, 0.12);
+      border: 1px solid rgba(232, 114, 30, 0.4);
+      color: var(--orange);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+      box-shadow: 0 0 6px var(--orange);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+    }
+
+    .hero-headline em::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 2px;
+    }
+
+    .service-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 36px;
+    }
+
+    /* Hero stat pills */
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 8px 16px;
+      transition: all 0.3s;
+    }
+
+    .hero-stat-pill:hover {
+      border-color: rgba(232, 114, 30, 0.4);
+      background: rgba(232, 114, 30, 0.08);
+    }
+
+    .hero-stat-pill .pill-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(232, 114, 30, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-stat-pill .pill-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-stat-pill .pill-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .hero-stat-pill .pill-lbl {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Visual card */
+    .hero-visual-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 22px;
+      padding: 20px;
+      width: 360px;
+      flex-shrink: 0;
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 0 1px rgba(232, 114, 30, 0.06);
+      animation: cardFloat 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .hero-visual-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(232, 114, 30, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes cardFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .card-live-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 200, 100, 0.15);
+      border: 1px solid rgba(0, 200, 100, 0.4);
+      color: #00c864;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .card-live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00c864;
+      animation: blink 1.2s ease-in-out infinite;
+      box-shadow: 0 0 5px #00c864;
+    }
+
+    /* ── Clock hand rotation ── */
+    .clock-hour {
+      transform-origin: 160px 128px;
+      animation: rotateHour 12s linear infinite;
+    }
+
+    .clock-minute {
+      transform-origin: 160px 128px;
+      animation: rotateMinute 2s linear infinite;
+    }
+
+    @keyframes rotateHour {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes rotateMinute {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ── Fingerprint scan sweep ── */
+    .fp-scan-line {
+      animation: fpScan 2.2s ease-in-out infinite;
+    }
+
+    @keyframes fpScan {
+      0% {
+        transform: translateY(0px);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(36px);
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: translateY(0px);
+        opacity: 0;
+      }
+    }
+
+    /* ── Face scan ring pulses ── */
+    .face-ring-1 {
+      animation: faceRing 2.4s ease-out infinite;
+    }
+
+    .face-ring-2 {
+      animation: faceRing 2.4s ease-out infinite 0.8s;
+    }
+
+    .face-ring-3 {
+      animation: faceRing 2.4s ease-out infinite 1.6s;
+    }
+
+    @keyframes faceRing {
+      0% {
+        r: 14;
+        opacity: 0.8;
+      }
+
+      100% {
+        r: 26;
+        opacity: 0;
+      }
+    }
+
+    /* ── Check-in ticker dots ── */
+    .tick-dot-1 {
+      animation: tickAppear 3s ease-in-out infinite 0s;
+    }
+
+    .tick-dot-2 {
+      animation: tickAppear 3s ease-in-out infinite 0.6s;
+    }
+
+    .tick-dot-3 {
+      animation: tickAppear 3s ease-in-out infinite 1.2s;
+    }
+
+    .tick-dot-4 {
+      animation: tickAppear 3s ease-in-out infinite 1.8s;
+    }
+
+    @keyframes tickAppear {
+
+      0%,
+      100% {
+        opacity: 0.15;
+      }
+
+      30%,
+      70% {
+        opacity: 1;
+      }
+    }
+
+    /* ── Bar chart grow ── */
+    .bar-1 {
+      animation: barGrow 3s ease-in-out infinite 0s;
+      transform-origin: bottom;
+    }
+
+    .bar-2 {
+      animation: barGrow 3s ease-in-out infinite 0.3s;
+      transform-origin: bottom;
+    }
+
+    .bar-3 {
+      animation: barGrow 3s ease-in-out infinite 0.6s;
+      transform-origin: bottom;
+    }
+
+    .bar-4 {
+      animation: barGrow 3s ease-in-out infinite 0.9s;
+      transform-origin: bottom;
+    }
+
+    .bar-5 {
+      animation: barGrow 3s ease-in-out infinite 1.2s;
+      transform-origin: bottom;
+    }
+
+    @keyframes barGrow {
+
+      0%,
+      100% {
+        transform: scaleY(0.5);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    /* ── Progress fill ── */
+    .progress-fill {
+      animation: progressFill 3s ease-in-out infinite;
+    }
+
+    @keyframes progressFill {
+      0% {
+        width: 10px;
+      }
+
+      60% {
+        width: 62px;
+      }
+
+      100% {
+        width: 10px;
+      }
+    }
+
+    /* ── Status dot pulse ── */
+    .status-pulse {
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+        r: 3;
+      }
+
+      50% {
+        opacity: 1;
+        r: 5;
+      }
+    }
+
+    @media(max-width:960px) {
+      .service-hero-content {
+        grid-template-columns: 1fr;
+        padding: 70px 24px;
+      }
+
+      .hero-visual-card {
+        display: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .service-hero-content {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav>
+    <div class="nav-logo">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#about">About Us</a></li>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../index.html#sectors">Sectors</a></li>
+      <li><a href="../index.html#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="service-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="service-hero-content">
+
+      <!-- LEFT: Text -->
+      <div class="service-hero-text">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="../index.html#services">Services</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="current">Time & Attendance</span>
+        </nav>
+
+        <div class="service-hero-badge">
+          <div class="badge-dot"></div>
+          HR Technology
+        </div>
+
+        <h1 class="hero-headline">
+          Track Smarter.<br>
+          <em>Pay Accurately.</em>
+        </h1>
+
+        <p class="service-hero-sub">
+          Eliminate manual timesheets and payroll errors with biometric-powered
+          workforce tracking — accurate attendance data, automated reports,
+          and seamless payroll integration built for UAE businesses.
+        </p>
+
+        <!-- Stat pills -->
+        <div class="hero-stats">
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">100%</div>
+              <div class="pill-lbl">Buddy Punch Free</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">Real-Time</div>
+              <div class="pill-lbl">Live Dashboard</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">Auto</div>
+              <div class="pill-lbl">Payroll Export</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">UAE</div>
+              <div class="pill-lbl">Labour Law Compliant</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Animated Time & Attendance SVG Illustration -->
+      <div class="hero-visual-card">
+        <div class="card-live-badge">Live Attendance Active</div>
+
+        <svg class="hero-illustration" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Background panel -->
+          <rect x="14" y="14" width="292" height="252" rx="18" fill="rgba(255,255,255,0.025)"
+            stroke="rgba(255,255,255,0.07)" stroke-width="1" />
+
+          <!-- ── Top status bar ── -->
+          <rect x="30" y="22" width="260" height="18" rx="5" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+          <circle cx="44" cy="31" r="4" fill="#00c864" opacity="0.9" />
+          <circle cx="44" cy="31" r="0" fill="#00c864">
+            <animate attributeName="r" values="4;9;4" dur="2.5s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite" />
+          </circle>
+          <rect x="54" y="27" width="50" height="8" rx="2" fill="rgba(0,200,100,0.25)" />
+          <rect x="110" y="27" width="36" height="8" rx="2" fill="rgba(255,255,255,0.1)" />
+          <rect x="152" y="27" width="44" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+          <rect x="202" y="27" width="40" height="8" rx="2" fill="rgba(232,114,30,0.2)" />
+
+          <!-- ══════════════════════════════
+               BIOMETRIC DEVICE (left)
+          ══════════════════════════════ -->
+          <!-- Device body -->
+          <rect x="30" y="48" width="76" height="110" rx="10" fill="rgba(15,24,48,0.97)" stroke="rgba(255,255,255,0.12)"
+            stroke-width="1.5" />
+          <!-- Device screen -->
+          <rect x="38" y="56" width="60" height="38" rx="5" fill="rgba(15,28,58,0.95)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
+          <!-- Screen: face outline -->
+          <!-- Face circle -->
+          <circle cx="68" cy="72" r="10" fill="none" stroke="rgba(0,200,100,0.5)" stroke-width="1.2"
+            stroke-dasharray="3 2" />
+          <!-- Animated scan rings -->
+          <circle cx="68" cy="72" r="14" fill="none" stroke="rgba(0,200,100,0.6)" stroke-width="1"
+            class="face-ring-1" />
+          <circle cx="68" cy="72" r="14" fill="none" stroke="rgba(0,200,100,0.4)" stroke-width="1"
+            class="face-ring-2" />
+          <circle cx="68" cy="72" r="14" fill="none" stroke="rgba(0,200,100,0.2)" stroke-width="1"
+            class="face-ring-3" />
+          <!-- Simplified face features -->
+          <circle cx="64" cy="70" r="1.5" fill="rgba(0,200,100,0.7)" />
+          <circle cx="72" cy="70" r="1.5" fill="rgba(0,200,100,0.7)" />
+          <path d="M64 75 Q68 78 72 75" stroke="rgba(0,200,100,0.7)" stroke-width="1" fill="none"
+            stroke-linecap="round" />
+          <!-- Corner brackets -->
+          <path d="M40 58 L40 63 M40 58 L45 58" stroke="rgba(232,114,30,0.8)" stroke-width="1.2" fill="none"
+            stroke-linecap="round" />
+          <path d="M96 58 L96 63 M96 58 L91 58" stroke="rgba(232,114,30,0.8)" stroke-width="1.2" fill="none"
+            stroke-linecap="round" />
+          <path d="M40 92 L40 87 M40 92 L45 92" stroke="rgba(232,114,30,0.8)" stroke-width="1.2" fill="none"
+            stroke-linecap="round" />
+          <path d="M96 92 L96 87 M96 92 L91 92" stroke="rgba(232,114,30,0.8)" stroke-width="1.2" fill="none"
+            stroke-linecap="round" />
+          <!-- VERIFIED label on screen -->
+          <rect x="43" y="89" width="30" height="5" rx="2" fill="rgba(0,200,100,0.5)" />
+          <rect x="75" y="89" width="16" height="5" rx="2" fill="rgba(255,255,255,0.1)" />
+
+          <!-- Fingerprint sensor area -->
+          <rect x="46" y="100" width="44" height="36" rx="6" fill="rgba(26,40,80,0.9)" stroke="rgba(100,160,255,0.3)"
+            stroke-width="1" />
+          <!-- Fingerprint ridges (static) -->
+          <path d="M68 104 Q76 108 76 116 Q76 124 68 128 Q60 124 60 116 Q60 108 68 104 Z" fill="none"
+            stroke="rgba(100,160,255,0.25)" stroke-width="1" />
+          <path d="M68 107 Q74 110 74 116 Q74 122 68 125 Q62 122 62 116 Q62 110 68 107 Z" fill="none"
+            stroke="rgba(100,160,255,0.25)" stroke-width="1" />
+          <path d="M68 110 Q72 113 72 116 Q72 119 68 122 Q64 119 64 116 Q64 113 68 110 Z" fill="none"
+            stroke="rgba(100,160,255,0.25)" stroke-width="1" />
+          <line x1="68" y1="104" x2="68" y2="128" stroke="rgba(100,160,255,0.15)" stroke-width="0.5" />
+          <!-- Scan line sweeping over fingerprint -->
+          <rect x="47" y="102" width="42" height="2" rx="1" fill="rgba(100,160,255,0.7)" class="fp-scan-line" />
+
+          <!-- Device status indicator -->
+          <circle cx="68" cy="146" r="4" fill="rgba(0,200,100,0.2)" stroke="rgba(0,200,100,0.6)" stroke-width="1" />
+          <circle cx="68" cy="146" r="2" fill="#00c864" class="status-pulse" />
+          <!-- RFID tap area -->
+          <rect x="42" y="154" width="52" height="6" rx="3" fill="rgba(232,114,30,0.15)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="0.8" />
+          <rect x="52" y="156" width="22" height="2" rx="1" fill="rgba(232,114,30,0.5)" />
+
+          <!-- Device brand label -->
+          <rect x="34" y="162" width="68" height="8" rx="2" fill="rgba(232,114,30,0.2)" />
+          <rect x="38" y="164" width="30" height="4" rx="1" fill="rgba(255,255,255,0.3)" />
+
+          <!-- ══════════════════════════════
+               CLOCK / TIME DISPLAY (center-top)
+          ══════════════════════════════ -->
+          <!-- Clock face -->
+          <circle cx="160" cy="90" r="38" fill="rgba(15,24,48,0.97)" stroke="rgba(232,114,30,0.3)" stroke-width="1.5" />
+          <circle cx="160" cy="90" r="34" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+
+          <!-- Hour ticks -->
+          <line x1="160" y1="57" x2="160" y2="62" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+          <line x1="160" y1="118" x2="160" y2="123" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+          <line x1="123" y1="90" x2="128" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+          <line x1="192" y1="90" x2="197" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+          <!-- Minor ticks -->
+          <line x1="179" y1="60" x2="177" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="191" y1="71" x2="187" y2="73" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="191" y1="109" x2="187" y2="107" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="179" y1="120" x2="177" y2="115" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="141" y1="60" x2="143" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="129" y1="71" x2="133" y2="73" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="129" y1="109" x2="133" y2="107" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <line x1="141" y1="120" x2="143" y2="115" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+          <!-- Hour hand (rotates slowly) -->
+          <line x1="160" y1="90" x2="160" y2="70" stroke="rgba(255,255,255,0.85)" stroke-width="2.5"
+            stroke-linecap="round" class="clock-hour" />
+          <!-- Minute hand (rotates fast) -->
+          <line x1="160" y1="90" x2="160" y2="61" stroke="#E8721E" stroke-width="1.8" stroke-linecap="round"
+            class="clock-minute" />
+          <!-- Second hand -->
+          <line x1="160" y1="90" x2="160" y2="59" stroke="rgba(0,200,100,0.8)" stroke-width="1" stroke-linecap="round">
+            <animateTransform attributeName="transform" type="rotate" from="0 160 90" to="360 160 90" dur="1s"
+              repeatCount="indefinite" />
+          </line>
+          <!-- Center dot -->
+          <circle cx="160" cy="90" r="3.5" fill="#E8721E" />
+          <circle cx="160" cy="90" r="1.5" fill="white" />
+
+          <!-- Time digital readout below clock -->
+          <rect x="136" y="131" width="48" height="16" rx="5" fill="rgba(26,40,80,0.9)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="1" />
+          <rect x="140" y="135" width="28" height="8" rx="2" fill="rgba(232,114,30,0.5)" />
+          <rect x="171" y="135" width="10" height="8" rx="2" fill="rgba(0,200,100,0.4)" />
+
+          <!-- ══════════════════════════════
+               ATTENDANCE BOARD (right)
+          ══════════════════════════════ -->
+          <rect x="214" y="48" width="92" height="122" rx="8" fill="rgba(15,24,48,0.97)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1.5" />
+          <!-- Board header -->
+          <rect x="214" y="48" width="92" height="16" rx="8 8 0 0" fill="rgba(232,114,30,0.25)" />
+          <rect x="218" y="52" width="40" height="5" rx="2" fill="rgba(255,255,255,0.5)" />
+          <circle cx="295" cy="56" r="3" fill="#00c864" />
+
+          <!-- Employee rows (5 rows) -->
+          <!-- Row 1 — PRESENT -->
+          <rect x="218" y="68" width="84" height="16" rx="3" fill="rgba(0,200,100,0.07)" />
+          <circle cx="226" cy="76" r="5" fill="rgba(0,200,100,0.25)" stroke="rgba(0,200,100,0.5)" stroke-width="1" />
+          <circle cx="226" cy="76" r="2" fill="#00c864" />
+          <rect x="235" y="72" width="36" height="4" rx="1" fill="rgba(255,255,255,0.3)" />
+          <rect x="235" y="78" width="24" height="3" rx="1" fill="rgba(0,200,100,0.5)" />
+          <rect x="272" y="72" width="24" height="7" rx="2" fill="rgba(0,200,100,0.3)" />
+          <rect x="274" y="74" width="16" height="3" rx="1" fill="rgba(0,200,100,0.8)" />
+
+          <!-- Row 2 — PRESENT -->
+          <rect x="218" y="88" width="84" height="16" rx="3" fill="rgba(255,255,255,0.025)" />
+          <circle cx="226" cy="96" r="5" fill="rgba(0,200,100,0.2)" stroke="rgba(0,200,100,0.4)" stroke-width="1" />
+          <circle cx="226" cy="96" r="2" fill="#00c864" class="tick-dot-1" />
+          <rect x="235" y="92" width="30" height="4" rx="1" fill="rgba(255,255,255,0.25)" />
+          <rect x="235" y="98" width="22" height="3" rx="1" fill="rgba(0,200,100,0.4)" />
+          <rect x="272" y="92" width="24" height="7" rx="2" fill="rgba(0,200,100,0.25)" />
+          <rect x="274" y="94" width="16" height="3" rx="1" fill="rgba(0,200,100,0.6)" />
+
+          <!-- Row 3 — LATE -->
+          <rect x="218" y="108" width="84" height="16" rx="3" fill="rgba(232,114,30,0.06)" />
+          <circle cx="226" cy="116" r="5" fill="rgba(232,114,30,0.2)" stroke="rgba(232,114,30,0.5)" stroke-width="1" />
+          <circle cx="226" cy="116" r="2" fill="#E8721E" class="tick-dot-2" />
+          <rect x="235" y="112" width="28" height="4" rx="1" fill="rgba(255,255,255,0.25)" />
+          <rect x="235" y="118" width="20" height="3" rx="1" fill="rgba(232,114,30,0.6)" />
+          <rect x="272" y="112" width="24" height="7" rx="2" fill="rgba(232,114,30,0.2)" />
+          <rect x="274" y="114" width="14" height="3" rx="1" fill="rgba(232,114,30,0.7)" />
+
+          <!-- Row 4 — PRESENT -->
+          <rect x="218" y="128" width="84" height="16" rx="3" fill="rgba(255,255,255,0.025)" />
+          <circle cx="226" cy="136" r="5" fill="rgba(0,200,100,0.2)" stroke="rgba(0,200,100,0.4)" stroke-width="1" />
+          <circle cx="226" cy="136" r="2" fill="#00c864" class="tick-dot-3" />
+          <rect x="235" y="132" width="34" height="4" rx="1" fill="rgba(255,255,255,0.25)" />
+          <rect x="235" y="138" width="24" height="3" rx="1" fill="rgba(0,200,100,0.4)" />
+          <rect x="272" y="132" width="24" height="7" rx="2" fill="rgba(0,200,100,0.25)" />
+          <rect x="274" y="134" width="16" height="3" rx="1" fill="rgba(0,200,100,0.6)" />
+
+          <!-- Row 5 — ABSENT -->
+          <rect x="218" y="148" width="84" height="16" rx="3" fill="rgba(255,60,60,0.05)" />
+          <circle cx="226" cy="156" r="5" fill="rgba(255,60,60,0.15)" stroke="rgba(255,60,60,0.4)" stroke-width="1" />
+          <circle cx="226" cy="156" r="2" fill="rgba(255,60,60,0.8)" class="tick-dot-4" />
+          <rect x="235" y="152" width="26" height="4" rx="1" fill="rgba(255,255,255,0.2)" />
+          <rect x="235" y="158" width="18" height="3" rx="1" fill="rgba(255,60,60,0.5)" />
+          <rect x="272" y="152" width="24" height="7" rx="2" fill="rgba(255,60,60,0.15)" />
+          <rect x="274" y="154" width="12" height="3" rx="1" fill="rgba(255,80,80,0.7)" />
+
+          <!-- Board divider -->
+          <line x1="218" y1="168" x2="302" y2="168" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+          <!-- Summary row -->
+          <rect x="218" y="172" width="84" height="16" rx="3" fill="rgba(255,255,255,0.02)" />
+          <rect x="220" y="175" width="16" height="5" rx="1" fill="rgba(0,200,100,0.5)" />
+          <rect x="240" y="175" width="12" height="5" rx="1" fill="rgba(232,114,30,0.5)" />
+          <rect x="256" y="175" width="12" height="5" rx="1" fill="rgba(255,60,60,0.4)" />
+          <rect x="271" y="175" width="28" height="5" rx="1" fill="rgba(255,255,255,0.1)" />
+
+          <!-- ══════════════════════════════
+               ATTENDANCE CHART (bottom center)
+          ══════════════════════════════ -->
+          <rect x="114" y="152" width="92" height="52" rx="7" fill="rgba(15,24,48,0.95)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <!-- Chart title bar -->
+          <rect x="118" y="156" width="40" height="5" rx="2" fill="rgba(232,114,30,0.4)" />
+          <rect x="162" y="156" width="20" height="5" rx="2" fill="rgba(255,255,255,0.1)" />
+          <rect x="186" y="156" width="14" height="5" rx="2" fill="rgba(0,200,100,0.3)" />
+
+          <!-- Bar chart baseline -->
+          <line x1="118" y1="196" x2="202" y2="196" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+
+          <!-- Bars: Mon–Fri attendance percentages -->
+          <!-- Mon -->
+          <rect x="122" y="178" width="10" height="18" rx="2" fill="rgba(0,200,100,0.6)" class="bar-1">
+            <title>Mon: 95%</title>
+          </rect>
+          <!-- Tue -->
+          <rect x="136" y="174" width="10" height="22" rx="2" fill="rgba(0,200,100,0.7)" class="bar-2">
+            <title>Tue: 98%</title>
+          </rect>
+          <!-- Wed -->
+          <rect x="150" y="181" width="10" height="15" rx="2" fill="rgba(232,114,30,0.65)" class="bar-3">
+            <title>Wed: 88%</title>
+          </rect>
+          <!-- Thu -->
+          <rect x="164" y="176" width="10" height="20" rx="2" fill="rgba(0,200,100,0.65)" class="bar-4">
+            <title>Thu: 96%</title>
+          </rect>
+          <!-- Fri -->
+          <rect x="178" y="184" width="10" height="12" rx="2" fill="rgba(232,114,30,0.5)" class="bar-5">
+            <title>Fri: 82%</title>
+          </rect>
+          <!-- Day labels -->
+          <rect x="122" y="198" width="10" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="136" y="198" width="10" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="150" y="198" width="10" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="164" y="198" width="10" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="178" y="198" width="10" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+
+          <!-- ══════════════════════════════
+               PAYROLL EXPORT CARD (bottom-left)
+          ══════════════════════════════ -->
+          <rect x="30" y="172" width="76" height="50" rx="7" fill="rgba(26,40,80,0.9)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <!-- Payroll icon -->
+          <rect x="36" y="178" width="14" height="16" rx="2" fill="rgba(232,114,30,0.2)" stroke="rgba(232,114,30,0.4)"
+            stroke-width="1" />
+          <rect x="38" y="181" width="7" height="2" rx="1" fill="rgba(232,114,30,0.7)" />
+          <rect x="38" y="185" width="8" height="2" rx="1" fill="rgba(255,255,255,0.3)" />
+          <rect x="38" y="189" width="6" height="2" rx="1" fill="rgba(255,255,255,0.3)" />
+          <!-- Label -->
+          <rect x="54" y="178" width="42" height="5" rx="2" fill="rgba(255,255,255,0.2)" />
+          <rect x="54" y="186" width="32" height="4" rx="1" fill="rgba(232,114,30,0.4)" />
+          <!-- Progress bar for export -->
+          <rect x="36" y="198" width="64" height="6" rx="3" fill="rgba(255,255,255,0.06)"
+            stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
+          <rect x="37" y="199" width="10" height="4" rx="2" fill="rgba(0,200,100,0.7)" class="progress-fill" />
+          <!-- Export badge -->
+          <rect x="36" y="207" width="30" height="8" rx="3" fill="rgba(0,200,100,0.15)" stroke="rgba(0,200,100,0.35)"
+            stroke-width="1" />
+          <rect x="39" y="210" width="16" height="3" rx="1" fill="rgba(0,200,100,0.7)" />
+          <rect x="70" y="207" width="28" height="8" rx="3" fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="1" />
+          <rect x="73" y="210" width="14" height="3" rx="1" fill="rgba(232,114,30,0.6)" />
+
+          <!-- ══════════════════════════════
+               BOTTOM INFO BAR
+          ══════════════════════════════ -->
+          <rect x="30" y="228" width="260" height="26" rx="6" fill="rgba(26,40,80,0.7)" stroke="rgba(255,255,255,0.06)"
+            stroke-width="1" />
+          <!-- UAE Compliant badge -->
+          <rect x="36" y="233" width="60" height="14" rx="4" fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="1" />
+          <circle cx="44" cy="240" r="4" fill="rgba(232,114,30,0.2)" stroke="rgba(232,114,30,0.6)" stroke-width="1" />
+          <path d="M42 240 l1.5 1.5 l3-3" stroke="#E8721E" stroke-width="1.1" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+          <rect x="50" y="237" width="38" height="3" rx="1" fill="rgba(232,114,30,0.6)" />
+          <rect x="50" y="243" width="26" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Multi-site badge -->
+          <rect x="104" y="233" width="62" height="14" rx="4" fill="rgba(100,160,255,0.08)"
+            stroke="rgba(100,160,255,0.25)" stroke-width="1" />
+          <rect x="108" y="237" width="36" height="3" rx="1" fill="rgba(100,160,255,0.6)" />
+          <rect x="108" y="243" width="24" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Biometric badge -->
+          <rect x="174" y="233" width="64" height="14" rx="4" fill="rgba(0,200,100,0.08)" stroke="rgba(0,200,100,0.25)"
+            stroke-width="1" />
+          <circle cx="182" cy="240" r="4" fill="rgba(0,200,100,0.15)" stroke="rgba(0,200,100,0.5)" stroke-width="1" />
+          <path d="M180 240 l1.5 1.5 l3-3" stroke="#00c864" stroke-width="1.1" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+          <rect x="188" y="237" width="40" height="3" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="188" y="243" width="28" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Shift badge -->
+          <rect x="246" y="233" width="36" height="14" rx="4" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
+          <rect x="250" y="237" width="24" height="3" rx="1" fill="rgba(232,114,30,0.5)" />
+          <rect x="250" y="243" width="18" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+
+        </svg>
+      </div><!-- /hero-visual-card -->
+
+    </div>
+  </section>
+  <!-- END HERO -->
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-text">
+      Stop losing money to timesheet errors.
+      <span>Get a free workforce management consultation.</span>
+    </div>
+    <a href="../index.html#contact" class="cta-strip-btn">Request Free Consultation →</a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="overview-section">
+    <div class="container">
+      <div class="overview-grid">
+        <div class="overview-text reveal">
+          <p class="section-tag">What We Provide</p>
+          <h2 class="section-title">Smarter Workforce <span>Management</span></h2>
+          <p>SecureHub's time and attendance systems replace error-prone paper registers and buddy punching with
+            accurate, tamper-proof biometric clock-in systems. Every punch is verified against a unique biological
+            identifier — ensuring the person clocking in is exactly who they say they are.</p>
+          <p>Our systems integrate directly with your HR and payroll software, converting raw attendance data into
+            ready-to-process payroll files — saving your HR team hours of manual work every pay cycle and eliminating
+            costly disputes before they arise.</p>
+          <div class="overview-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Biometric Clock-In / Clock-Out</h4>
+                <p>Fingerprint, facial recognition, palm vein, and RFID card readers that completely eliminate buddy
+                  punching and time fraud — every clock event is linked to a verified identity.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Automated Payroll Reports</h4>
+                <p>Scheduled attendance exports delivered in your payroll system's required format — zero manual data
+                  entry, zero discrepancies, every pay period.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Leave & Overtime Management</h4>
+                <p>Digital leave applications, manager approvals, leave balance tracking, and automatic overtime
+                  calculation aligned with UAE Labour Law requirements.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overview-stats reveal">
+          <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">Buddy Punch
+              Elimination</span></div>
+          <div class="stat-row">
+            <div class="stat-card"><span class="stat-num">Auto</span><span class="stat-label">Payroll Export</span>
+            </div>
+            <div class="stat-card"><span class="stat-num">Real</span><span class="stat-label">-Time Dashboards</span>
+            </div>
+          </div>
+          <div class="stat-card"><span class="stat-num">UAE</span><span class="stat-label">Labour Law Compliant</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Core Capabilities</p>
+        <h2 class="section-title">Everything Your HR Team <span>Needs</span></h2>
+        <p class="section-sub">A complete workforce management platform that grows with your team — from 10 to 10,000
+          employees.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+            </svg>
+          </div>
+          <h4>Multi-Modal Biometric Devices</h4>
+          <p>Fingerprint, face recognition, palm vein, and RFID card readers to suit all workplace environments —
+            including clean rooms, outdoor sites, and hygiene-sensitive areas.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <h4>Shift & Schedule Management</h4>
+          <p>Define rotating shifts, fixed schedules, and flexible hours across unlimited departments. Automatically
+            apply the correct overtime and allowance rules per group.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h4>Real-Time Attendance Dashboard</h4>
+          <p>Live visibility of who is in, who is late, and who is absent — across all departments and multiple site
+            locations simultaneously from one web-based portal.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </div>
+          <h4>Automated Reporting</h4>
+          <p>Daily, weekly, and monthly attendance reports scheduled and delivered to managers — covering late arrivals,
+            absenteeism trends, overtime summaries, and payroll-ready exports.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h4>Leave Management Module</h4>
+          <p>Digital leave requests with manager approval workflows, leave balance tracking, public holiday calendar
+            integration, and automatic carryover rules for all staff categories.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <h4>Payroll System Integration</h4>
+          <p>Direct data export to popular payroll platforms including SAP, Oracle, Sage, Bayzat, and custom HR systems
+            via API or scheduled CSV/Excel delivery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag" style="color:var(--orange)">How It Works</p>
+        <h2 class="section-title">Up and Running in <span>Days</span></h2>
+        <p class="section-sub">A quick, structured deployment that causes zero disruption to your workforce or daily
+          operations.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">1</div>
+          <div class="step-title">Needs Assessment</div>
+          <div class="step-desc">We review your workforce size, shift structure, existing payroll system, and site
+            locations to design the right solution before any hardware is ordered.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">2</div>
+          <div class="step-title">Device Installation</div>
+          <div class="step-desc">Biometric terminals installed, cabled, and networked at all clock-in/out points —
+            entrance gates, production floors, back offices — across your facility.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">3</div>
+          <div class="step-title">Employee Enrollment</div>
+          <div class="step-desc">All staff biometric templates enrolled securely and mapped to HR records. Typically
+            completed within half a day for teams of up to 200 employees.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">4</div>
+          <div class="step-title">Go Live & Support</div>
+          <div class="step-desc">Full HR team training, payroll integration configured and tested, and ongoing AMC
+            support for system health, firmware updates, and new employee enrollment.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Who We Serve</p>
+        <h2 class="section-title">Trusted by <span>Every Industry</span></h2>
+      </div>
+      <div class="industries-grid reveal">
+        <div class="industry-chip"><span>🏢</span> Corporate & SME Offices</div>
+        <div class="industry-chip"><span>🏭</span> Manufacturing & Factories</div>
+        <div class="industry-chip"><span>🏨</span> Hotels & Hospitality</div>
+        <div class="industry-chip"><span>🏥</span> Healthcare & Clinics</div>
+        <div class="industry-chip"><span>🏫</span> Schools & Universities</div>
+        <div class="industry-chip"><span>🏗️</span> Construction Companies</div>
+        <div class="industry-chip"><span>🛍️</span> Retail Chains</div>
+        <div class="industry-chip"><span>🏛️</span> Government Entities</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Common Questions</p>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can the system handle multiple shifts and locations?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. Our platform supports unlimited shifts, rotating schedules, and multiple site locations — all
+              managed from a single centralised web dashboard. Each location's clock events consolidate in real time,
+              and managers can drill into any site or department independently.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Is the system compatible with our existing payroll software?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>We integrate with most major HR and payroll platforms including SAP, Oracle, Sage, Bayzat, and many
+              UAE-based systems. Where native integration isn't available, we provide scheduled CSV or Excel exports
+              formatted exactly to your payroll team's requirements — no manual reformatting needed.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What if an employee's fingerprint isn't being recognised?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Devices support multiple fallback methods — face recognition, palm vein, RFID card, or PIN — so no
+              employee is ever locked out. We also re-enroll fingerprint templates for workers with worn prints, which
+              is common in manual labour and construction environments.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Is biometric data stored securely and privately?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>All biometric templates are stored as encrypted mathematical representations — not actual images of
+              fingerprints or faces. Data is held on-premise or in a secure private server, never shared with third
+              parties, and fully aligned with UAE data protection guidelines and best practices.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Does the system calculate overtime automatically?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. The system applies your configured overtime rules automatically — daily and weekly overtime
+              thresholds, weekend rates, public holiday multipliers — all in accordance with UAE Labour Law Article 65
+              and its amendments. Overtime summaries feed directly into your payroll export.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can employees view their own attendance and leave records?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. Employees access a self-service portal (web and mobile) where they can view their own attendance
+              logs, remaining leave balances, submitted leave requests, and overtime hours. This transparency
+              dramatically reduces HR queries and disputes over pay.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content reveal">
+      <h2>Modernise Your <span>Workforce Tracking</span></h2>
+      <p>Say goodbye to manual timesheets, buddy punching, and payroll disputes. Let us build a reliable, automated
+        attendance system tailored to your team's size, shifts, and payroll requirements — backed by ongoing AMC
+        support.</p>
+      <div class="cta-buttons">
+        <a href="../index.html#contact" class="btn-primary">Get a Free Quote →</a>
+        <a href="tel:+971562914955" class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Speak to an Expert
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-left">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <div class="footer-links">
+      <a href="cctv-surveillance.html">CCTV</a>
+      <a href="structured-cabling.html">Cabling</a>
+      <a href="access-control.html">Access Control</a>
+      <a href="ip-pabx.html">IP PABX</a>
+      <a href="pa-speaker.html">PA System</a>
+    </div>
+    <div class="footer-right">© 2026 <span>SecureHub Smart Vision Technology</span>. Abu Dhabi, UAE.</div>
+  </footer>
+
+  <!-- FLOATING CALL BUTTON -->
+  <a href="tel:+971562914955" class="phone-float" aria-label="Call us">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
+    </svg>
+  </a>
+
+  <script>
+    /* ── FAQ toggle (accordion) ── */
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── Hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    });
+
+    /* ── Nav scroll shadow ── */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,0.4)' : 'none';
+    });
+  </script>
+
+</body>
+
+</html>

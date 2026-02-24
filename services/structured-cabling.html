@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structured Cabling (Cat6 & Fiber) — SecureHub Smart Vision Technology</title>
+  <!-- FIXED: correct CSS path (this page is inside /services/) -->
+  <link rel="stylesheet" href="../src/css/service-page.css">
+  <!-- FIXED: correct favicon path -->
+  <link rel="icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <style>
+    /* ─────────────────────────────────────────
+       NAV / HAMBURGER
+    ───────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      background: none;
+      border: none;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      transition: all 0.35s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media(max-width:900px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 22, 40, 0.98);
+        backdrop-filter: blur(16px);
+        padding: 18px 24px 24px;
+        gap: 4px;
+        transform: translateY(-110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
+        z-index: 999;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+      }
+
+      .nav-cta {
+        margin-top: 8px;
+        text-align: center;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .service-hero {
+      min-height: 560px;
+      background: linear-gradient(135deg, #060e1f 0%, #0f1c38 45%, #0a1525 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(232, 114, 30, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 114, 30, 0.07) 1px, transparent 1px);
+      background-size: 52px 52px;
+      animation: gridShift 18s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 52px 52px;
+      }
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.18), transparent 65%);
+      top: -180px;
+      right: -120px;
+      animation: orbPulse 6s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(44, 62, 107, 0.7), transparent 70%);
+      bottom: -80px;
+      left: -80px;
+    }
+
+    .hero-orb-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.1), transparent 70%);
+      top: 50%;
+      left: 38%;
+      transform: translate(-50%, -50%);
+      animation: orbPulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .8;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+    .service-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--orange);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb .current {
+      color: var(--orange);
+    }
+
+    .service-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 114, 30, 0.12);
+      border: 1px solid rgba(232, 114, 30, 0.4);
+      color: var(--orange);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+      box-shadow: 0 0 6px var(--orange);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+
+    /* FIXED: hero headline — no class conflict */
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+    }
+
+    .hero-headline em::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 2px;
+    }
+
+    .service-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 36px;
+    }
+
+    /* Hero stat pills */
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 8px 16px;
+      transition: all 0.3s;
+    }
+
+    .hero-stat-pill:hover {
+      border-color: rgba(232, 114, 30, 0.4);
+      background: rgba(232, 114, 30, 0.08);
+    }
+
+    .hero-stat-pill .pill-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(232, 114, 30, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-stat-pill .pill-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-stat-pill .pill-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .hero-stat-pill .pill-lbl {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Visual card */
+    .hero-visual-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 22px;
+      padding: 20px;
+      width: 360px;
+      flex-shrink: 0;
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 0 1px rgba(232, 114, 30, 0.06);
+      animation: cardFloat 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .hero-visual-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(232, 114, 30, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes cardFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .card-live-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 200, 100, 0.15);
+      border: 1px solid rgba(0, 200, 100, 0.4);
+      color: #00c864;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .card-live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00c864;
+      animation: blink 1.2s ease-in-out infinite;
+      box-shadow: 0 0 5px #00c864;
+    }
+
+    /* Data pulse traveling along fiber */
+    .fiber-pulse-1 {
+      animation: fiberTravel 2.5s linear infinite;
+    }
+
+    .fiber-pulse-2 {
+      animation: fiberTravel 2.5s linear infinite 0.8s;
+    }
+
+    .fiber-pulse-3 {
+      animation: fiberTravel 2.5s linear infinite 1.6s;
+    }
+
+    @keyframes fiberTravel {
+      0% {
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Patch panel port blink */
+    .port-active {
+      animation: portBlink 3s ease-in-out infinite;
+    }
+
+    @keyframes portBlink {
+
+      0%,
+      80%,
+      100% {
+        opacity: 0.3;
+      }
+
+      85% {
+        opacity: 1;
+      }
+    }
+
+    /* Fluke test sweep */
+    .test-sweep {
+      animation: testSweep 3s ease-in-out infinite;
+      transform-origin: left center;
+    }
+
+    @keyframes testSweep {
+
+      0%,
+      100% {
+        transform: scaleX(0.1);
+        opacity: 0.3;
+      }
+
+      50% {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+
+    @media(max-width:960px) {
+      .service-hero-content {
+        grid-template-columns: 1fr;
+        padding: 70px 24px;
+      }
+
+      .hero-visual-card {
+        display: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .service-hero-content {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav>
+    <div class="nav-logo">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#about">About Us</a></li>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../index.html#sectors">Sectors</a></li>
+      <li><a href="../index.html#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="service-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="service-hero-content">
+
+      <!-- LEFT: Text -->
+      <div class="service-hero-text">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="../index.html#services">Services</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="current">Structured Cabling</span>
+        </nav>
+
+        <div class="service-hero-badge">
+          <div class="badge-dot"></div>
+          Network Infrastructure
+        </div>
+
+        <!-- FIXED: .hero-headline — no conflict with .service-hero -->
+        <h1 class="hero-headline">
+          Built Right.<br>
+          <em>Built to Last.</em>
+        </h1>
+
+        <p class="service-hero-sub">
+          Future-proof network infrastructure built to international standards —
+          clean, organised Cat6 copper and fiber optic installations that power
+          every device, system, and service in your building.
+        </p>
+
+        <!-- Stat pills -->
+        <div class="hero-stats">
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">10Gbps</div>
+              <div class="pill-lbl">Cat6A Speed</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">100%</div>
+              <div class="pill-lbl">Fluke Certified</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">25-Year</div>
+              <div class="pill-lbl">Warranty</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="5" rx="1" />
+                <rect x="2" y="10" width="20" height="5" rx="1" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">TIA/EIA</div>
+              <div class="pill-lbl">Standards</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Animated Structured Cabling SVG Illustration -->
+      <div class="hero-visual-card">
+        <div class="card-live-badge">All Ports Certified</div>
+
+        <svg class="hero-illustration" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Background panel -->
+          <rect x="14" y="14" width="292" height="252" rx="18" fill="rgba(255,255,255,0.025)"
+            stroke="rgba(255,255,255,0.07)" stroke-width="1" />
+
+          <!-- ── Top status bar ── -->
+          <rect x="30" y="22" width="260" height="18" rx="5" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+          <circle cx="44" cy="31" r="4" fill="#00c864" opacity="0.9" />
+          <circle cx="44" cy="31" r="0" fill="#00c864">
+            <animate attributeName="r" values="4;9;4" dur="2.5s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite" />
+          </circle>
+          <rect x="54" y="27" width="44" height="8" rx="2" fill="rgba(0,200,100,0.25)" />
+          <rect x="104" y="27" width="36" height="8" rx="2" fill="rgba(255,255,255,0.1)" />
+          <rect x="146" y="27" width="50" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+          <rect x="202" y="27" width="36" height="8" rx="2" fill="rgba(232,114,30,0.2)" />
+          <rect x="244" y="27" width="26" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+
+          <!-- ══════════════════════════════
+               NETWORK RACK (center)
+          ══════════════════════════════ -->
+          <!-- Rack enclosure -->
+          <rect x="108" y="44" width="104" height="160" rx="6" fill="rgba(15,24,48,0.97)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1.5" />
+          <!-- Rack top bar -->
+          <rect x="108" y="44" width="104" height="6" rx="6 6 0 0" fill="rgba(232,114,30,0.3)" />
+          <!-- Rack rails -->
+          <rect x="110" y="50" width="8" height="152" rx="1" fill="rgba(255,255,255,0.04)" />
+          <rect x="202" y="50" width="8" height="152" rx="1" fill="rgba(255,255,255,0.04)" />
+
+          <!-- ── Patch Panel 1 (top) ── -->
+          <rect x="118" y="54" width="84" height="18" rx="3" fill="rgba(26,40,80,0.9)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="1" />
+          <!-- 12 ports -->
+          <rect x="121" y="57" width="6" height="7" rx="1" fill="rgba(232,114,30,0.5)" />
+          <rect x="129" y="57" width="6" height="7" rx="1" fill="rgba(0,200,100,0.7)" class="port-active" />
+          <rect x="137" y="57" width="6" height="7" rx="1" fill="rgba(0,200,100,0.7)" />
+          <rect x="145" y="57" width="6" height="7" rx="1" fill="rgba(232,114,30,0.5)" class="port-active"
+            style="animation-delay:1s" />
+          <rect x="153" y="57" width="6" height="7" rx="1" fill="rgba(0,200,100,0.7)" />
+          <rect x="161" y="57" width="6" height="7" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="169" y="57" width="6" height="7" rx="1" fill="rgba(0,200,100,0.7)" class="port-active"
+            style="animation-delay:0.5s" />
+          <rect x="177" y="57" width="6" height="7" rx="1" fill="rgba(0,200,100,0.7)" />
+          <rect x="185" y="57" width="6" height="7" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="193" y="57" width="6" height="7" rx="1" fill="rgba(0,200,100,0.7)" />
+          <!-- Port numbers row -->
+          <rect x="121" y="66" width="76" height="3" rx="1" fill="rgba(255,255,255,0.06)" />
+          <!-- Label -->
+          <rect x="121" y="58" width="0" height="0" />
+
+          <!-- ── Patch Panel 2 ── -->
+          <rect x="118" y="76" width="84" height="18" rx="3" fill="rgba(26,40,80,0.9)" stroke="rgba(44,62,107,0.5)"
+            stroke-width="1" />
+          <rect x="121" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="129" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="137" y="79" width="6" height="7" rx="1" fill="rgba(255,255,255,0.12)" />
+          <rect x="145" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" class="port-active"
+            style="animation-delay:1.2s" />
+          <rect x="153" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="161" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="169" y="79" width="6" height="7" rx="1" fill="rgba(255,255,255,0.12)" />
+          <rect x="177" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="185" y="79" width="6" height="7" rx="1" fill="rgba(0,200,100,0.6)" class="port-active"
+            style="animation-delay:0.7s" />
+          <rect x="193" y="79" width="6" height="7" rx="1" fill="rgba(255,255,255,0.12)" />
+          <rect x="121" y="88" width="76" height="3" rx="1" fill="rgba(255,255,255,0.06)" />
+
+          <!-- ── 1U blank ── -->
+          <rect x="118" y="98" width="84" height="8" rx="2" fill="rgba(255,255,255,0.03)" />
+
+          <!-- ── Network Switch ── -->
+          <rect x="118" y="110" width="84" height="20" rx="3" fill="rgba(44,62,107,0.85)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
+          <!-- Switch ports -->
+          <circle cx="126" cy="120" r="2.5" fill="rgba(0,200,100,0.8)" />
+          <circle cx="133" cy="120" r="2.5" fill="rgba(0,200,100,0.8)" />
+          <circle cx="140" cy="120" r="2.5" fill="rgba(0,200,100,0.8)" />
+          <circle cx="147" cy="120" r="2.5" fill="rgba(255,255,255,0.25)" />
+          <circle cx="154" cy="120" r="2.5" fill="rgba(0,200,100,0.8)" />
+          <circle cx="161" cy="120" r="2.5" fill="rgba(255,255,255,0.25)" />
+          <circle cx="168" cy="120" r="2.5" fill="rgba(0,200,100,0.8)" />
+          <circle cx="175" cy="120" r="2.5" fill="rgba(232,114,30,0.8)" />
+          <circle cx="182" cy="120" r="2.5" fill="rgba(0,200,100,0.8)" />
+          <!-- SFP slot -->
+          <rect x="190" y="116" width="8" height="8" rx="1" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="0.5" />
+
+          <!-- ── Fiber Patch Panel ── -->
+          <rect x="118" y="134" width="84" height="18" rx="3" fill="rgba(20,35,70,0.9)" stroke="rgba(100,160,255,0.35)"
+            stroke-width="1" />
+          <!-- Fiber connectors (LC duplex style) -->
+          <rect x="123" y="138" width="5" height="8" rx="1" fill="rgba(100,160,255,0.5)" />
+          <rect x="130" y="138" width="5" height="8" rx="1" fill="rgba(100,160,255,0.5)" />
+          <rect x="139" y="138" width="5" height="8" rx="1" fill="rgba(232,114,30,0.6)" />
+          <rect x="146" y="138" width="5" height="8" rx="1" fill="rgba(232,114,30,0.6)" />
+          <rect x="155" y="138" width="5" height="8" rx="1" fill="rgba(100,160,255,0.5)" />
+          <rect x="162" y="138" width="5" height="8" rx="1" fill="rgba(100,160,255,0.5)" />
+          <rect x="171" y="138" width="5" height="8" rx="1" fill="rgba(100,160,255,0.3)" />
+          <rect x="178" y="138" width="5" height="8" rx="1" fill="rgba(100,160,255,0.3)" />
+          <rect x="187" y="138" width="5" height="8" rx="1" fill="rgba(255,255,255,0.1)" />
+          <rect x="194" y="138" width="5" height="8" rx="1" fill="rgba(255,255,255,0.1)" />
+          <!-- Fiber label strip -->
+          <rect x="118" y="150" width="84" height="3" rx="0" fill="rgba(100,160,255,0.12)" />
+
+          <!-- ── UPS unit ── -->
+          <rect x="118" y="157" width="84" height="18" rx="3" fill="rgba(26,40,80,0.8)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <rect x="122" y="161" width="30" height="5" rx="1" fill="rgba(232,114,30,0.3)" />
+          <!-- UPS battery indicator -->
+          <rect x="156" y="160" width="40" height="8" rx="2" fill="rgba(255,255,255,0.05)"
+            stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
+          <rect x="157" y="161" width="30" height="6" rx="1" fill="rgba(0,200,100,0.4)" class="test-sweep" />
+          <rect x="194" y="162" width="3" height="4" rx="1" fill="rgba(255,255,255,0.2)" />
+
+          <!-- ── Cable management 1U ── -->
+          <rect x="118" y="179" width="84" height="10" rx="2" fill="rgba(255,255,255,0.03)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+          <!-- Cable loops -->
+          <path d="M122 184 Q127 179 132 184" stroke="rgba(255,165,0,0.3)" stroke-width="1" fill="none" />
+          <path d="M134 184 Q139 179 144 184" stroke="rgba(0,200,100,0.3)" stroke-width="1" fill="none" />
+          <path d="M146 184 Q151 179 156 184" stroke="rgba(100,160,255,0.3)" stroke-width="1" fill="none" />
+          <path d="M158 184 Q163 179 168 184" stroke="rgba(255,165,0,0.3)" stroke-width="1" fill="none" />
+          <path d="M170 184 Q175 179 180 184" stroke="rgba(0,200,100,0.3)" stroke-width="1" fill="none" />
+
+          <!-- Rack bottom rail -->
+          <rect x="118" y="193" width="84" height="8" rx="1" fill="rgba(255,255,255,0.03)" />
+
+          <!-- ══════════════════════════════
+               FIBER BACKBONE (left side)
+          ══════════════════════════════ -->
+          <!-- Fiber conduit -->
+          <rect x="50" y="50" width="10" height="150" rx="5" fill="rgba(20,35,70,0.8)" stroke="rgba(100,160,255,0.3)"
+            stroke-width="1" />
+          <!-- Fiber strands inside -->
+          <line x1="53" y1="56" x2="53" y2="194" stroke="rgba(100,160,255,0.4)" stroke-width="1" />
+          <line x1="57" y1="56" x2="57" y2="194" stroke="rgba(232,114,30,0.35)" stroke-width="1" />
+          <!-- Animated light pulses traveling down fiber -->
+          <circle cx="53" cy="56" r="2.5" fill="rgba(100,160,255,0.9)" class="fiber-pulse-1">
+            <animateMotion dur="2.5s" repeatCount="indefinite" begin="0s">
+              <mpath href="#fiberPath1" />
+            </animateMotion>
+          </circle>
+          <circle cx="53" cy="56" r="2.5" fill="rgba(100,160,255,0.9)" class="fiber-pulse-2">
+            <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.8s">
+              <mpath href="#fiberPath1" />
+            </animateMotion>
+          </circle>
+          <circle cx="57" cy="56" r="2" fill="rgba(232,114,30,0.8)" class="fiber-pulse-3">
+            <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.6s">
+              <mpath href="#fiberPath2" />
+            </animateMotion>
+          </circle>
+          <!-- Hidden fiber paths -->
+          <path id="fiberPath1" d="M0,0 L0,138" fill="none" stroke="none" />
+          <path id="fiberPath2" d="M0,0 L0,138" fill="none" stroke="none" />
+
+          <!-- Fiber label -->
+          <rect x="36" y="48" width="28" height="8" rx="3" fill="rgba(100,160,255,0.15)" stroke="rgba(100,160,255,0.4)"
+            stroke-width="1" />
+          <rect x="39" y="51" width="16" height="2" rx="1" fill="rgba(100,160,255,0.7)" />
+          <!-- Fiber connection to rack -->
+          <line x1="60" y1="143" x2="118" y2="143" stroke="rgba(100,160,255,0.3)" stroke-width="1"
+            stroke-dasharray="3 3" />
+
+          <!-- ══════════════════════════════
+               FLUKE TESTER (right side)
+          ══════════════════════════════ -->
+          <rect x="238" y="80" width="58" height="90" rx="10" fill="rgba(26,40,80,0.92)" stroke="rgba(232,114,30,0.35)"
+            stroke-width="1.5" />
+          <!-- Tester screen -->
+          <rect x="243" y="86" width="48" height="36" rx="5" fill="rgba(15,28,58,0.95)" stroke="rgba(232,114,30,0.2)"
+            stroke-width="1" />
+          <!-- PASS result -->
+          <rect x="247" y="90" width="20" height="6" rx="2" fill="rgba(0,200,100,0.6)" />
+          <rect x="247" y="99" width="36" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <!-- Speed test bar -->
+          <rect x="247" y="105" width="40" height="5" rx="2" fill="rgba(255,255,255,0.06)" />
+          <rect x="247" y="105" width="0" height="5" rx="2" fill="rgba(0,200,100,0.6)" class="test-sweep" />
+          <rect x="247" y="113" width="30" height="3" rx="1" fill="rgba(255,255,255,0.08)" />
+          <!-- Navigation buttons -->
+          <circle cx="252" cy="134" r="5" fill="rgba(44,62,107,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <circle cx="264" cy="134" r="5" fill="rgba(44,62,107,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <circle cx="276" cy="134" r="5" fill="rgba(232,114,30,0.5)" stroke="rgba(232,114,30,0.3)" stroke-width="1" />
+          <!-- Bottom plug port -->
+          <rect x="252" y="144" width="12" height="8" rx="2" fill="rgba(255,255,255,0.05)"
+            stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <rect x="266" y="144" width="12" height="8" rx="2" fill="rgba(255,255,255,0.05)"
+            stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <!-- Tester label -->
+          <rect x="242" y="158" width="38" height="6" rx="2" fill="rgba(232,114,30,0.3)" />
+          <rect x="244" y="160" width="22" height="2" rx="1" fill="rgba(255,255,255,0.4)" />
+          <!-- Cable to rack -->
+          <line x1="238" y1="120" x2="212" y2="120" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"
+            stroke-dasharray="3 3" />
+
+          <!-- ══════════════════════════════
+               CABLE TRAY (bottom)
+          ══════════════════════════════ -->
+          <rect x="30" y="210" width="260" height="14" rx="4" fill="rgba(20,32,64,0.7)" stroke="rgba(255,255,255,0.07)"
+            stroke-width="1" />
+          <!-- Cables in tray (coloured) -->
+          <line x1="36" y1="217" x2="284" y2="217" stroke="rgba(255,165,0,0.45)" stroke-width="2"
+            stroke-linecap="round" />
+          <line x1="36" y1="213" x2="284" y2="213" stroke="rgba(0,200,100,0.4)" stroke-width="2"
+            stroke-linecap="round" />
+          <line x1="36" y1="221" x2="284" y2="221" stroke="rgba(100,160,255,0.4)" stroke-width="2"
+            stroke-linecap="round" />
+          <!-- Tray cross members -->
+          <line x1="80" y1="210" x2="80" y2="224" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+          <line x1="130" y1="210" x2="130" y2="224" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+          <line x1="180" y1="210" x2="180" y2="224" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+          <line x1="230" y1="210" x2="230" y2="224" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+
+          <!-- ── As-Built doc label ── -->
+          <rect x="30" y="230" width="108" height="28" rx="6" fill="rgba(26,40,80,0.85)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <rect x="36" y="234" width="48" height="5" rx="2" fill="rgba(232,114,30,0.5)" />
+          <rect x="36" y="243" width="38" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="36" y="249" width="30" height="3" rx="1" fill="rgba(255,255,255,0.1)" />
+          <circle cx="122" cy="244" r="5" fill="rgba(0,200,100,0.15)" stroke="rgba(0,200,100,0.4)" stroke-width="1" />
+          <path d="M119.5 244 l2 2 l4-4" stroke="#00c864" stroke-width="1.2" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+
+          <!-- ── TIA certified badge ── -->
+          <rect x="152" y="230" width="138" height="28" rx="6" fill="rgba(26,40,80,0.85)" stroke="rgba(232,114,30,0.2)"
+            stroke-width="1" />
+          <rect x="158" y="234" width="50" height="5" rx="2" fill="rgba(232,114,30,0.45)" />
+          <rect x="158" y="243" width="36" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="200" y="234" width="38" height="5" rx="2" fill="rgba(0,200,100,0.3)" />
+          <rect x="200" y="243" width="28" height="3" rx="1" fill="rgba(255,255,255,0.1)" />
+          <rect x="244" y="233" width="36" height="18" rx="3" fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="1" />
+          <rect x="247" y="237" width="22" height="4" rx="1" fill="rgba(232,114,30,0.6)" />
+          <rect x="247" y="244" width="16" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+
+          <!-- ── Shield corner ── -->
+          <circle cx="285" cy="50" r="18" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)" stroke-width="1" />
+          <path d="M285 41 c-5 0 -8 3.5 -8 8 v4.5 c0 5 3.5 7.5 8 9.5 c4.5-2 8-4.5 8-9.5 v-4.5 c0-4.5 -3-8 -8-8 z"
+            stroke="rgba(232,114,30,0.85)" stroke-width="1.4" fill="rgba(232,114,30,0.18)" />
+          <path d="M282 51 l2.5 2.5 l5-5" stroke="rgba(232,114,30,0.9)" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+
+        </svg>
+      </div><!-- /hero-visual-card -->
+
+    </div>
+  </section>
+  <!-- END HERO -->
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-text">
+      Need a network infrastructure quote?
+      <span>We'll survey your site at no cost.</span>
+    </div>
+    <a href="../index.html#contact" class="cta-strip-btn">Request Free Consultation →</a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="overview-section">
+    <div class="container">
+      <div class="overview-grid">
+        <div class="overview-text reveal">
+          <p class="section-tag">What We Provide</p>
+          <h2 class="section-title">The Backbone of Your <span>Digital Infrastructure</span></h2>
+          <p>A well-designed structured cabling system is the foundation every other technology in your building depends
+            on. SecureHub designs and installs organised, standards-compliant cabling infrastructures that deliver
+            maximum performance today while scaling effortlessly for tomorrow.</p>
+          <p>Our certified technicians follow TIA/EIA-568 and ISO/IEC 11801 standards, ensuring every cable run,
+            termination, and patch panel meets the highest quality benchmarks — backed by Fluke certification reports on
+            every single port.</p>
+          <div class="overview-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Cat6 & Cat6A Copper Cabling</h4>
+                <p>Up to 10Gbps speeds with superior crosstalk reduction for high-density office and data centre
+                  environments.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Single & Multi-Mode Fiber Optic</h4>
+                <p>Long-distance, interference-free backbone connections between floors and buildings with near-zero
+                  signal loss.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Certified Testing & Documentation</h4>
+                <p>Every installation verified with Fluke DTX certification reports and complete as-built drawings
+                  handed over at completion.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overview-stats reveal">
+          <div class="stat-card"><span class="stat-num">10G</span><span class="stat-label">Max Data Speed (Cat6A)</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-card"><span class="stat-num">25yr</span><span class="stat-label">System Warranty</span>
+            </div>
+            <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">Fluke Certified</span>
+            </div>
+          </div>
+          <div class="stat-card"><span class="stat-num">TIA/EIA</span><span class="stat-label">Standards
+              Compliant</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Core Capabilities</p>
+        <h2 class="section-title">Complete Cabling <span>Solutions</span></h2>
+        <p class="section-sub">Every component, every termination, every cable run — done right the first time.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="5" rx="1" />
+              <rect x="2" y="10" width="20" height="5" rx="1" />
+              <circle cx="18" cy="5.5" r="1" fill="white" />
+              <circle cx="18" cy="12.5" r="1" fill="white" />
+              <path d="M6 19v-4M10 19v-4M14 19v-4" />
+              <path d="M6 19h8" />
+            </svg>
+          </div>
+          <h4>Patch Panel & Rack Installation</h4>
+          <p>Neat, labelled patch panels and structured racks that make future moves, adds, and changes a breeze — with
+            full port documentation.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+              <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+              <circle cx="12" cy="20" r="1" fill="white" />
+            </svg>
+          </div>
+          <h4>Fiber Optic Termination</h4>
+          <p>Fusion-spliced and pre-terminated fiber assemblies with OTDR-verified connections for backbone runs up to
+            several kilometres.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <h4>MDF / IDF Room Setup</h4>
+          <p>Professional main and intermediate distribution frame rooms with cooling, power distribution, earthing, and
+            full cable management.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
+          </div>
+          <h4>Conduit & Cable Tray</h4>
+          <p>Clean, protected cable routing through metallic and PVC conduit, surface trunking, and cable trays — with
+            fire-rated sealing where required.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h4>Fluke Certification Testing</h4>
+          <p>Every data point tested and certified with Fluke DTX equipment, producing full pass/fail reports per TIA
+            standards — no exceptions.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </div>
+          <h4>As-Built Documentation</h4>
+          <p>Complete labelled as-built drawings, port schedules, Fluke test reports, and warranty certificates handed
+            over at project completion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag" style="color:var(--orange)">Our Methodology</p>
+        <h2 class="section-title">From Design to <span>Certification</span></h2>
+        <p class="section-sub">A structured, quality-controlled process that guarantees first-time performance.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">1</div>
+          <div class="step-title">Site Survey & Design</div>
+          <div class="step-desc">Floor plan review, cable path planning, rack design, and equipment sizing for your
+            exact building layout and requirements.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">2</div>
+          <div class="step-title">Material Supply</div>
+          <div class="step-desc">Sourcing certified Cat6/Cat6A and fiber materials from approved vendors with full
+            product traceability and compliance docs.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">3</div>
+          <div class="step-title">Installation</div>
+          <div class="step-desc">Neat installation by certified technicians with proper labelling, cable management, and
+            clean terminations at every outlet.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">4</div>
+          <div class="step-title">Test & Certify</div>
+          <div class="step-desc">Fluke testing on every port, OTDR fiber verification, full documentation package, and
+            warranty certificate handover.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Who We Serve</p>
+        <h2 class="section-title">Built for Every <span>Environment</span></h2>
+      </div>
+      <div class="industries-grid reveal">
+        <div class="industry-chip"><span>🏢</span> Corporate Offices</div>
+        <div class="industry-chip"><span>🏨</span> Hotels & Hospitality</div>
+        <div class="industry-chip"><span>🏭</span> Industrial Facilities</div>
+        <div class="industry-chip"><span>🏥</span> Healthcare</div>
+        <div class="industry-chip"><span>🏫</span> Schools & Universities</div>
+        <div class="industry-chip"><span>🏗️</span> Construction Projects</div>
+        <div class="industry-chip"><span>🏛️</span> Government Buildings</div>
+        <div class="industry-chip"><span>🏘️</span> Residential Compounds</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Common Questions</p>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What is the difference between Cat6 and Cat6A?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Cat6 supports 1Gbps up to 100m and 10Gbps up to 55m. Cat6A supports 10Gbps across the full 100m with
+              better alien crosstalk shielding — ideal for high-density or data centre environments. We recommend the
+              right choice based on your specific use case and future requirements.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Do you provide a warranty on the cabling installation?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. We offer up to 25-year system warranties when using certified channel components. This covers both
+              materials and performance guarantees backed by the manufacturer — giving you long-term peace of mind on
+              your infrastructure investment.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Will the installation disrupt our office operations?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>We schedule work to minimise disruption — typically undertaking major cable runs during off-hours or
+              weekends. Our team works efficiently with clean methods to have zero impact on your day-to-day operations,
+              and we provide a phased plan upfront so you know exactly what to expect.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can you upgrade our existing cabling infrastructure?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Absolutely. We perform infrastructure audits, identify bottlenecks and substandard runs, and carry out
+              targeted upgrades — whether that's replacing old Cat5e with Cat6A, adding new data points, installing a
+              fiber backbone between floors, or reorganising a messy rack.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>When do I need fiber optic instead of copper cabling?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Fiber is recommended for backbone runs between floors or buildings (distances beyond 100m), high-speed
+              connections between server rooms and switches, and environments with strong electrical interference. It
+              provides near-unlimited bandwidth with zero electromagnetic susceptibility, making it the future-proof
+              choice for any long-distance or high-performance link.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content reveal">
+      <h2>Build Your Network on a <span>Solid Foundation</span></h2>
+      <p>Let our certified engineers design and install a cabling infrastructure that performs flawlessly from day one
+        and scales with your business for years to come — backed by a 25-year warranty.</p>
+      <div class="cta-buttons">
+        <a href="../index.html#contact" class="btn-primary">Get a Free Quote →</a>
+        <a href="tel:+971562914955" class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Speak to an Expert
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-left">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <div class="footer-links">
+      <a href="cctv-surveillance.html">CCTV</a>
+      <a href="access-control.html">Access Control</a>
+      <a href="time-attendance.html">Attendance</a>
+      <a href="ip-pabx.html">IP PABX</a>
+      <a href="pa-speaker.html">PA System</a>
+    </div>
+    <div class="footer-right">© 2026 <span>SecureHub Smart Vision Technology</span>. Abu Dhabi, UAE.</div>
+  </footer>
+
+  <!-- FLOATING CALL BUTTON -->
+  <a href="tel:+971562914955" class="phone-float" aria-label="Call us">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
+    </svg>
+  </a>
+
+  <script>
+    /* ── FAQ toggle (accordion) ── */
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── Hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    });
+
+    /* ── Nav scroll shadow ── */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,0.4)' : 'none';
+    });
+  </script>
+
+</body>
+
+</html>

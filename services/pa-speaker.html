@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PA Speaker System — SecureHub Smart Vision Technology</title>
+  <link rel="stylesheet" href="../src/css/service-page.css">
+  <!-- FIXED: correct relative path from /services/ folder -->
+  <link rel="icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <style>
+    /* ─────────────────────────────────────────
+       NAV / HAMBURGER
+    ───────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      background: none;
+      border: none;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      transition: all 0.35s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media(max-width:900px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 22, 40, 0.98);
+        backdrop-filter: blur(16px);
+        padding: 18px 24px 24px;
+        gap: 4px;
+        transform: translateY(-110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
+        z-index: 999;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+      }
+
+      .nav-cta {
+        margin-top: 8px;
+        text-align: center;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .service-hero {
+      min-height: 560px;
+      background: linear-gradient(135deg, #060e1f 0%, #0f1c38 45%, #0a1525 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(232, 114, 30, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 114, 30, 0.07) 1px, transparent 1px);
+      background-size: 52px 52px;
+      animation: gridShift 18s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 52px 52px;
+      }
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.18), transparent 65%);
+      top: -180px;
+      right: -120px;
+      animation: orbPulse 6s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(44, 62, 107, 0.7), transparent 70%);
+      bottom: -80px;
+      left: -80px;
+    }
+
+    .hero-orb-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.1), transparent 70%);
+      top: 50%;
+      left: 38%;
+      transform: translate(-50%, -50%);
+      animation: orbPulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .8;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+    .service-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--orange);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb .current {
+      color: var(--orange);
+    }
+
+    .service-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 114, 30, 0.12);
+      border: 1px solid rgba(232, 114, 30, 0.4);
+      color: var(--orange);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+      box-shadow: 0 0 6px var(--orange);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+
+    /* FIXED: hero headline — no class conflict with .service-hero */
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+    }
+
+    .hero-headline em::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 2px;
+    }
+
+    .service-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 36px;
+    }
+
+    /* Hero stat pills */
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 8px 16px;
+      transition: all 0.3s;
+    }
+
+    .hero-stat-pill:hover {
+      border-color: rgba(232, 114, 30, 0.4);
+      background: rgba(232, 114, 30, 0.08);
+    }
+
+    .hero-stat-pill .pill-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(232, 114, 30, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-stat-pill .pill-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-stat-pill .pill-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .hero-stat-pill .pill-lbl {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Visual card */
+    .hero-visual-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 22px;
+      padding: 20px;
+      width: 360px;
+      flex-shrink: 0;
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 0 1px rgba(232, 114, 30, 0.06);
+      animation: cardFloat 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .hero-visual-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(232, 114, 30, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes cardFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .card-live-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(232, 114, 30, 0.15);
+      border: 1px solid rgba(232, 114, 30, 0.45);
+      color: var(--orange);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .card-live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: blink 1.2s ease-in-out infinite;
+      box-shadow: 0 0 5px var(--orange);
+    }
+
+    /* Sound wave ripple animations */
+    .sound-wave-1 {
+      animation: soundRipple 2.4s ease-out infinite;
+      transform-origin: 160px 100px;
+    }
+
+    .sound-wave-2 {
+      animation: soundRipple 2.4s ease-out infinite 0.5s;
+      transform-origin: 160px 100px;
+    }
+
+    .sound-wave-3 {
+      animation: soundRipple 2.4s ease-out infinite 1s;
+      transform-origin: 160px 100px;
+    }
+
+    @keyframes soundRipple {
+      0% {
+        opacity: 0.7;
+        transform: scale(0.6);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.4);
+      }
+    }
+
+    /* EQ bar animations */
+    .eq-bar-1 {
+      animation: eqBounce 0.8s ease-in-out infinite alternate;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-2 {
+      animation: eqBounce 0.6s ease-in-out infinite alternate 0.1s;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-3 {
+      animation: eqBounce 1.1s ease-in-out infinite alternate 0.2s;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-4 {
+      animation: eqBounce 0.7s ease-in-out infinite alternate 0.05s;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-5 {
+      animation: eqBounce 0.9s ease-in-out infinite alternate 0.15s;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-6 {
+      animation: eqBounce 0.65s ease-in-out infinite alternate 0.25s;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-7 {
+      animation: eqBounce 1.0s ease-in-out infinite alternate 0.1s;
+      transform-origin: bottom;
+    }
+
+    .eq-bar-8 {
+      animation: eqBounce 0.75s ease-in-out infinite alternate 0.3s;
+      transform-origin: bottom;
+    }
+
+    @keyframes eqBounce {
+      0% {
+        transform: scaleY(0.25);
+      }
+
+      100% {
+        transform: scaleY(1);
+      }
+    }
+
+    /* Emergency flash */
+    .emergency-flash {
+      animation: emergencyPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes emergencyPulse {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @media(max-width:960px) {
+      .service-hero-content {
+        grid-template-columns: 1fr;
+        padding: 70px 24px;
+      }
+
+      .hero-visual-card {
+        display: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .service-hero-content {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav>
+    <div class="nav-logo">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#about">About Us</a></li>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../index.html#sectors">Sectors</a></li>
+      <li><a href="../index.html#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="service-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="service-hero-content">
+
+      <!-- LEFT: Text -->
+      <div class="service-hero-text">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="../index.html#services">Services</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="current">PA Speaker System</span>
+        </nav>
+
+        <div class="service-hero-badge">
+          <div class="badge-dot"></div>
+          Audio Systems
+        </div>
+
+        <!-- FIXED: .hero-headline — no conflict with .service-hero -->
+        <h1 class="hero-headline">
+          Be Heard.<br>
+          <em>Everywhere It Counts.</em>
+        </h1>
+
+        <p class="service-hero-sub">
+          Crystal-clear audio distribution for offices, warehouses, hospitals, and public spaces —
+          with intelligent zone control, emergency paging, and background music all managed
+          from a single platform.
+        </p>
+
+        <!-- Stat pills -->
+        <div class="hero-stats">
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">100%</div>
+              <div class="pill-lbl">Zone Coverage</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">EN54</div>
+              <div class="pill-lbl">Life Safety</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">IP65</div>
+              <div class="pill-lbl">Outdoor Rated</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">Multi-Zone</div>
+              <div class="pill-lbl">Independent Audio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Animated PA System SVG Illustration -->
+      <div class="hero-visual-card">
+        <div class="card-live-badge">Audio Active</div>
+
+        <svg class="hero-illustration" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Background panel -->
+          <rect x="14" y="14" width="292" height="252" rx="18" fill="rgba(255,255,255,0.025)"
+            stroke="rgba(255,255,255,0.07)" stroke-width="1" />
+
+          <!-- ── Top status bar ── -->
+          <rect x="30" y="22" width="260" height="18" rx="5" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+          <circle cx="44" cy="31" r="4" fill="rgba(232,114,30,0.9)" opacity="0.9" />
+          <circle cx="44" cy="31" r="0" fill="rgba(232,114,30,0.9)">
+            <animate attributeName="r" values="4;9;4" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <rect x="54" y="27" width="40" height="8" rx="2" fill="rgba(232,114,30,0.3)" />
+          <rect x="100" y="27" width="32" height="8" rx="2" fill="rgba(255,255,255,0.1)" />
+          <rect x="138" y="27" width="50" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+          <rect x="194" y="27" width="38" height="8" rx="2" fill="rgba(0,200,100,0.2)" />
+          <rect x="238" y="27" width="30" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+
+          <!-- ══════════════════════════════
+               CENTRAL AMPLIFIER / CONTROLLER
+          ══════════════════════════════ -->
+          <rect x="98" y="46" width="124" height="68" rx="10" fill="rgba(26,40,80,0.95)" stroke="rgba(232,114,30,0.4)"
+            stroke-width="1.5" />
+          <!-- Rack face accent top -->
+          <rect x="98" y="46" width="124" height="4" rx="10 10 0 0" fill="rgba(232,114,30,0.35)" />
+          <!-- Label -->
+          <rect x="104" y="54" width="52" height="6" rx="2" fill="rgba(232,114,30,0.5)" />
+          <!-- Zone indicators row -->
+          <rect x="160" y="54" width="8" height="6" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="172" y="54" width="8" height="6" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="184" y="54" width="8" height="6" rx="1" fill="rgba(255,255,255,0.2)" />
+          <rect x="196" y="54" width="8" height="6" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="208" y="54" width="6" height="6" rx="1" fill="rgba(232,114,30,0.5)" />
+
+          <!-- EQ visualiser bars -->
+          <g transform="translate(104, 90)">
+            <!-- 8 EQ bars, bottom-anchored at y=0 going up -->
+            <rect x="0" y="-32" width="9" height="32" rx="2" fill="rgba(232,114,30,0.7)" class="eq-bar-1" />
+            <rect x="13" y="-20" width="9" height="20" rx="2" fill="rgba(232,114,30,0.65)" class="eq-bar-2" />
+            <rect x="26" y="-38" width="9" height="38" rx="2" fill="rgba(232,114,30,0.75)" class="eq-bar-3" />
+            <rect x="39" y="-26" width="9" height="26" rx="2" fill="rgba(232,114,30,0.6)" class="eq-bar-4" />
+            <rect x="52" y="-44" width="9" height="44" rx="2" fill="rgba(232,114,30,0.8)" class="eq-bar-5" />
+            <rect x="65" y="-18" width="9" height="18" rx="2" fill="rgba(232,114,30,0.55)" class="eq-bar-6" />
+            <rect x="78" y="-36" width="9" height="36" rx="2" fill="rgba(232,114,30,0.7)" class="eq-bar-7" />
+            <rect x="91" y="-28" width="9" height="28" rx="2" fill="rgba(232,114,30,0.65)" class="eq-bar-8" />
+          </g>
+
+          <!-- Power / volume knobs -->
+          <circle cx="210" cy="78" r="9" fill="rgba(15,28,58,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <line x1="210" y1="71" x2="210" y2="75" stroke="rgba(232,114,30,0.8)" stroke-width="1.5"
+            stroke-linecap="round" />
+          <circle cx="210" cy="78" r="3" fill="rgba(232,114,30,0.4)" />
+
+          <!-- ══════════════════════════════
+               CEILING SPEAKER (top left)
+          ══════════════════════════════ -->
+          <!-- Ceiling mount -->
+          <rect x="34" y="44" width="52" height="8" rx="4" fill="rgba(44,62,107,0.7)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1" />
+          <!-- Speaker cone -->
+          <circle cx="60" cy="52" r="20" fill="rgba(26,40,80,0.9)" stroke="rgba(232,114,30,0.35)" stroke-width="1.5" />
+          <circle cx="60" cy="52" r="14" fill="rgba(15,28,58,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+          <circle cx="60" cy="52" r="8" fill="rgba(232,114,30,0.15)" stroke="rgba(232,114,30,0.4)" stroke-width="1" />
+          <circle cx="60" cy="52" r="3" fill="rgba(232,114,30,0.6)" />
+          <!-- Sound waves from ceiling speaker -->
+          <circle cx="60" cy="52" r="24" fill="none" stroke="rgba(232,114,30,0.25)" stroke-width="1"
+            class="sound-wave-1" />
+          <circle cx="60" cy="52" r="30" fill="none" stroke="rgba(232,114,30,0.15)" stroke-width="1"
+            class="sound-wave-2" />
+          <circle cx="60" cy="52" r="38" fill="none" stroke="rgba(232,114,30,0.08)" stroke-width="1"
+            class="sound-wave-3" />
+          <!-- Zone tag -->
+          <rect x="36" y="75" width="36" height="8" rx="3" fill="rgba(0,200,100,0.15)" stroke="rgba(0,200,100,0.35)"
+            stroke-width="1" />
+          <rect x="39" y="78" width="20" height="2" rx="1" fill="rgba(0,200,100,0.6)" />
+
+          <!-- ══════════════════════════════
+               HORN SPEAKER (top right — outdoor)
+          ══════════════════════════════ -->
+          <!-- Bracket -->
+          <rect x="234" y="44" width="52" height="6" rx="3" fill="rgba(44,62,107,0.6)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <!-- Horn body -->
+          <path d="M244 50 L244 70 L280 82 L280 42 Z" fill="rgba(26,40,80,0.9)" stroke="rgba(232,114,30,0.35)"
+            stroke-width="1.5" />
+          <!-- Horn mouth grille -->
+          <line x1="280" y1="46" x2="280" y2="78" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+          <line x1="278" y1="48" x2="278" y2="76" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+          <!-- Horn label -->
+          <rect x="246" y="78" width="32" height="8" rx="3" fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.3)"
+            stroke-width="1" />
+          <rect x="249" y="81" width="18" height="2" rx="1" fill="rgba(232,114,30,0.5)" />
+          <!-- Sound waves from horn (directional) -->
+          <path d="M282 52 Q292 62 282 72" stroke="rgba(232,114,30,0.4)" stroke-width="1.2" fill="none"
+            stroke-linecap="round">
+            <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.8s" repeatCount="indefinite" />
+          </path>
+          <path d="M286 48 Q300 62 286 76" stroke="rgba(232,114,30,0.25)" stroke-width="1" fill="none"
+            stroke-linecap="round">
+            <animate attributeName="opacity" values="0.1;0.5;0.1" dur="1.8s" begin="0.3s" repeatCount="indefinite" />
+          </path>
+
+          <!-- Wire from amplifier to ceiling speaker -->
+          <line x1="98" y1="72" x2="80" y2="72" stroke="rgba(255,255,255,0.08)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <line x1="80" y1="72" x2="80" y2="58" stroke="rgba(255,255,255,0.08)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <!-- Wire from amplifier to horn speaker -->
+          <line x1="222" y1="72" x2="244" y2="72" stroke="rgba(255,255,255,0.08)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <line x1="244" y1="72" x2="244" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1"
+            stroke-dasharray="3 3" />
+
+          <!-- ══════════════════════════════
+               ZONE CONTROL MAP (bottom left)
+          ══════════════════════════════ -->
+          <rect x="30" y="130" width="120" height="110" rx="8" fill="rgba(26,40,80,0.85)"
+            stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+          <!-- Title -->
+          <rect x="36" y="136" width="52" height="5" rx="2" fill="rgba(232,114,30,0.5)" />
+          <!-- Zone blocks -->
+          <!-- Zone A -->
+          <rect x="36" y="148" width="46" height="28" rx="4" fill="rgba(0,200,100,0.1)" stroke="rgba(0,200,100,0.4)"
+            stroke-width="1" />
+          <rect x="39" y="151" width="24" height="4" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="39" y="158" width="16" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Volume bar A -->
+          <rect x="39" y="164" width="36" height="4" rx="2" fill="rgba(255,255,255,0.06)" />
+          <rect x="39" y="164" width="28" height="4" rx="2" fill="rgba(0,200,100,0.5)" />
+          <!-- Zone B -->
+          <rect x="88" y="148" width="46" height="28" rx="4" fill="rgba(232,114,30,0.08)" stroke="rgba(232,114,30,0.35)"
+            stroke-width="1" />
+          <rect x="91" y="151" width="24" height="4" rx="1" fill="rgba(232,114,30,0.5)" />
+          <rect x="91" y="158" width="16" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Volume bar B -->
+          <rect x="91" y="164" width="36" height="4" rx="2" fill="rgba(255,255,255,0.06)" />
+          <rect x="91" y="164" width="18" height="4" rx="2" fill="rgba(232,114,30,0.5)" />
+          <!-- Zone C -->
+          <rect x="36" y="182" width="46" height="28" rx="4" fill="rgba(0,200,100,0.1)" stroke="rgba(0,200,100,0.4)"
+            stroke-width="1" />
+          <rect x="39" y="185" width="24" height="4" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="39" y="192" width="16" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <rect x="39" y="198" width="36" height="4" rx="2" fill="rgba(255,255,255,0.06)" />
+          <rect x="39" y="198" width="32" height="4" rx="2" fill="rgba(0,200,100,0.5)" />
+          <!-- Zone D -->
+          <rect x="88" y="182" width="46" height="28" rx="4" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+          <rect x="91" y="185" width="24" height="4" rx="1" fill="rgba(255,255,255,0.25)" />
+          <rect x="91" y="192" width="16" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <rect x="91" y="198" width="36" height="4" rx="2" fill="rgba(255,255,255,0.06)" />
+          <rect x="91" y="198" width="10" height="4" rx="2" fill="rgba(255,255,255,0.2)" />
+          <!-- Zone label -->
+          <rect x="36" y="218" width="98" height="14" rx="3" fill="rgba(44,62,107,0.6)" />
+          <rect x="40" y="222" width="28" height="4" rx="1" fill="rgba(255,255,255,0.25)" />
+          <circle cx="120" cy="225" r="3" fill="rgba(0,200,100,0.6)" />
+
+          <!-- ══════════════════════════════
+               EMERGENCY PAGING PANEL (bottom right)
+          ══════════════════════════════ -->
+          <rect x="162" y="130" width="128" height="110" rx="8" fill="rgba(26,40,80,0.85)" stroke="rgba(232,114,30,0.2)"
+            stroke-width="1" />
+          <!-- Emergency header -->
+          <rect x="168" y="136" width="116" height="18" rx="4" fill="rgba(232,114,30,0.12)"
+            stroke="rgba(232,114,30,0.35)" stroke-width="1" />
+          <!-- Emergency label -->
+          <rect x="174" y="140" width="52" height="5" rx="2" fill="rgba(232,114,30,0.6)" />
+          <!-- Emergency flash indicator -->
+          <circle cx="266" cy="145" r="5" fill="rgba(232,114,30,0.2)" stroke="rgba(232,114,30,0.6)" stroke-width="1"
+            class="emergency-flash" />
+          <circle cx="274" cy="145" r="5" fill="rgba(232,114,30,0.2)" stroke="rgba(232,114,30,0.6)" stroke-width="1"
+            class="emergency-flash" style="animation-delay:0.4s" />
+          <!-- Microphone icon area -->
+          <rect x="168" y="160" width="52" height="50" rx="6" fill="rgba(15,28,58,0.8)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <!-- Mic shape -->
+          <rect x="181" y="165" width="14" height="22" rx="7" fill="rgba(232,114,30,0.2)" stroke="rgba(232,114,30,0.5)"
+            stroke-width="1.2" />
+          <!-- Mic stand -->
+          <path d="M176 190 Q176 198 188 198 Q200 198 200 190" stroke="rgba(232,114,30,0.5)" stroke-width="1.2"
+            fill="none" stroke-linecap="round" />
+          <line x1="188" y1="198" x2="188" y2="205" stroke="rgba(232,114,30,0.4)" stroke-width="1.2"
+            stroke-linecap="round" />
+          <!-- Paging buttons -->
+          <rect x="226" y="160" width="56" height="14" rx="4" fill="rgba(0,200,100,0.15)" stroke="rgba(0,200,100,0.4)"
+            stroke-width="1" />
+          <rect x="230" y="164" width="30" height="4" rx="1" fill="rgba(0,200,100,0.6)" />
+          <rect x="226" y="178" width="56" height="14" rx="4" fill="rgba(232,114,30,0.12)"
+            stroke="rgba(232,114,30,0.35)" stroke-width="1" />
+          <rect x="230" y="182" width="24" height="4" rx="1" fill="rgba(232,114,30,0.5)" />
+          <rect x="226" y="196" width="56" height="14" rx="4" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+          <rect x="230" y="200" width="20" height="4" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Paging panel bottom -->
+          <rect x="168" y="218" width="114" height="14" rx="3" fill="rgba(44,62,107,0.5)" />
+          <rect x="172" y="222" width="36" height="4" rx="1" fill="rgba(255,255,255,0.2)" />
+          <circle cx="268" cy="225" r="3" fill="rgba(0,200,100,0.5)">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite" />
+          </circle>
+
+          <!-- Wire from amp to zone controller -->
+          <line x1="160" y1="114" x2="160" y2="130" stroke="rgba(232,114,30,0.25)" stroke-width="1.5"
+            stroke-dasharray="3 3" />
+
+          <!-- ── Shield corner ── -->
+          <circle cx="285" cy="50" r="18" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)" stroke-width="1" />
+          <path d="M285 41 c-5 0 -8 3.5 -8 8 v4.5 c0 5 3.5 7.5 8 9.5 c4.5-2 8-4.5 8-9.5 v-4.5 c0-4.5 -3-8 -8-8 z"
+            stroke="rgba(232,114,30,0.85)" stroke-width="1.4" fill="rgba(232,114,30,0.18)" />
+          <path d="M282 51 l2.5 2.5 l5-5" stroke="rgba(232,114,30,0.9)" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+
+        </svg>
+      </div><!-- /hero-visual-card -->
+
+    </div>
+  </section>
+  <!-- END HERO -->
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-text">
+      Need a PA system for your facility?
+      <span>Get expert advice and a free site assessment.</span>
+    </div>
+    <a href="../index.html#contact" class="cta-strip-btn">Request Free Consultation →</a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="overview-section">
+    <div class="container">
+      <div class="overview-grid">
+        <div class="overview-text reveal">
+          <p class="section-tag">What We Provide</p>
+          <h2 class="section-title">Be Heard, <span>Everywhere That Matters</span></h2>
+          <p>SecureHub designs and installs professional public address systems that deliver clear, intelligible audio
+            to every corner of your facility. From background music and routine announcements to life-safety emergency
+            broadcasts, our PA systems perform flawlessly when it matters most.</p>
+          <p>We use acoustic modelling to ensure every zone is covered with optimal SPL levels — no dead spots, no
+            distortion, no feedback. Just clear, reliable audio that serves your people effectively.</p>
+          <div class="overview-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Multi-Zone Audio Control</h4>
+                <p>Independent volume and content management for each area — lobby, floors, car parks, and more, all
+                  from one interface.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Emergency Evacuation Paging</h4>
+                <p>Life-safety grade systems with automatic priority override that instantly mutes all audio during fire
+                  or emergency events.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Background Music Integration</h4>
+                <p>Scheduled playlists, streaming sources, and volume automation tied to your business hours and zone
+                  requirements.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overview-stats reveal">
+          <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">Zone Coverage
+              Guaranteed</span></div>
+          <div class="stat-row">
+            <div class="stat-card"><span class="stat-num">EN54</span><span class="stat-label">Certified for Life
+                Safety</span></div>
+            <div class="stat-card"><span class="stat-num">IP65</span><span class="stat-label">Outdoor Rated
+                Speakers</span></div>
+          </div>
+          <div class="stat-card"><span class="stat-num">Multi</span><span class="stat-label">-Source Audio
+              Routing</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Core Capabilities</p>
+        <h2 class="section-title">Professional Audio for <span>Every Space</span></h2>
+        <p class="section-sub">From a single-floor office to a campus-wide industrial complex — we have the right
+          solution.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            </svg>
+          </div>
+          <h4>Ceiling & Wall Speakers</h4>
+          <p>Low-profile flush-mount and surface-mount speakers for offices, corridors, and public areas — acoustically
+            matched to each unique space.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h4>Weatherproof Outdoor Speakers</h4>
+          <p>IP65-rated horn and dome speakers for car parks, loading bays, outdoor areas, and perimeter zones built to
+            withstand UAE conditions.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h4>Zone Controller & Matrix Amplifiers</h4>
+          <p>Digital zone controllers and high-power matrix amplifiers that manage audio routing, priorities, volume
+            levels, and source selection.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </div>
+          <h4>IP Network Audio</h4>
+          <p>Modern IP-based PA using your existing network infrastructure — easy to expand, manage, and integrate with
+            VoIP, PABX, and fire alarm systems.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h4>Emergency Evacuation System</h4>
+          <p>EN54-16 compliant voice alarm systems with automatic fire panel integration, backup battery power, and
+            continuous fault monitoring.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="1" x2="6" y2="4" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="14" y1="1" x2="14" y2="4" />
+            </svg>
+          </div>
+          <h4>Paging Microphone & Control Panel</h4>
+          <p>Desk microphones, wall-mount paging panels, and touch-screen zone controllers for easy, instant
+            staff-initiated announcements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag" style="color:var(--orange)">How It Works</p>
+        <h2 class="section-title">From Acoustic Design to <span>Crystal-Clear Audio</span></h2>
+        <p class="section-sub">A methodical process that guarantees the right sound, in the right place, at the right
+          level.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">1</div>
+          <div class="step-title">Acoustic Survey</div>
+          <div class="step-desc">We assess the acoustics, dimensions, ambient noise levels, and life-safety requirements
+            of every zone in your facility.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">2</div>
+          <div class="step-title">System Design</div>
+          <div class="step-desc">Speaker placement, amplifier sizing, zone mapping, cable routing schematic, and
+            equipment specification tailored to your layout.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">3</div>
+          <div class="step-title">Installation</div>
+          <div class="step-desc">Professional installation with concealed wiring, equipment rack build, fire panel
+            integration, and zone configuration.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">4</div>
+          <div class="step-title">Tuning & Handover</div>
+          <div class="step-desc">On-site EQ tuning, SPL level testing, staff training on paging controls, and AMC
+            agreement for ongoing performance.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Who We Serve</p>
+        <h2 class="section-title">Installed Across <span>Every Sector</span></h2>
+      </div>
+      <div class="industries-grid reveal">
+        <div class="industry-chip"><span>🏢</span> Corporate Offices</div>
+        <div class="industry-chip"><span>🏨</span> Hotels & Resorts</div>
+        <div class="industry-chip"><span>🏭</span> Warehouses & Factories</div>
+        <div class="industry-chip"><span>🏥</span> Hospitals & Clinics</div>
+        <div class="industry-chip"><span>🏫</span> Schools & Universities</div>
+        <div class="industry-chip"><span>🛍️</span> Malls & Retail</div>
+        <div class="industry-chip"><span>🏛️</span> Mosques & Community Halls</div>
+        <div class="industry-chip"><span>🏗️</span> Construction & Logistics</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Common Questions</p>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can the PA system integrate with our fire alarm panel?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. We install EN54-compliant voice alarm systems that interface directly with fire alarm control
+              panels, automatically triggering pre-recorded evacuation messages and overriding all other audio the
+              moment a fire signal is received.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can different zones play different audio simultaneously?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Absolutely. Our zone controller systems allow each zone to independently receive different audio sources
+              — the lobby can play background music while a floor receives a staff announcement, and the car park plays
+              a different stream entirely, all simultaneously.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What type of speaker is best for a warehouse?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>For high-noise, large-volume warehouse environments we recommend horn speakers — they deliver high SPL
+              output and are IP65-rated for dusty or wet conditions. We calculate the exact number and placement needed
+              to achieve clear, intelligible audio throughout the entire space.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can the system be expanded after installation?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes, all our PA systems are designed with future scalability in mind. Additional zones and speakers can
+              be added without replacing the core equipment — we plan spare capacity into the amplifier and controller
+              specification from day one.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Does the PA system work during a power outage?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. Our EN54-compliant emergency systems include dedicated battery backup to ensure the voice alarm and
+              evacuation paging remain fully functional during a power cut — a critical requirement for life-safety
+              compliance in commercial buildings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content reveal">
+      <h2>Make Your Voice <span>Heard Everywhere</span></h2>
+      <p>Our audio engineers will design a PA system perfectly suited to your facility — delivering clear, powerful
+        audio for daily operations and life-safety emergencies alike, with zero compromise.</p>
+      <div class="cta-buttons">
+        <a href="../index.html#contact" class="btn-primary">Get a Free Quote →</a>
+        <a href="tel:+971562914955" class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Speak to an Expert
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-left">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <div class="footer-links">
+      <a href="cctv-surveillance.html">CCTV</a>
+      <a href="structured-cabling.html">Cabling</a>
+      <a href="access-control.html">Access Control</a>
+      <a href="time-attendance.html">Attendance</a>
+      <a href="ip-pabx.html">IP PABX</a>
+    </div>
+    <div class="footer-right">© 2026 <span>SecureHub Smart Vision Technology</span>. Abu Dhabi, UAE.</div>
+  </footer>
+
+  <!-- FLOATING CALL BUTTON -->
+  <a href="tel:+971562914955" class="phone-float" aria-label="Call us">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
+    </svg>
+  </a>
+
+  <script>
+    /* ── FAQ toggle (accordion) ── */
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── Hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    });
+
+    /* ── Nav scroll shadow ── */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,0.4)' : 'none';
+    });
+  </script>
+
+</body>
+
+</html>

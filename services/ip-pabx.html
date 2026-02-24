@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP PABX Telephone System — SecureHub Smart Vision Technology</title>
+  <link rel="stylesheet" href="../src/css/service-page.css">
+  <!-- FIXED: correct relative path from /services/ folder -->
+  <link rel="icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../src/images/favicon.ico">
+  <style>
+    /* ─────────────────────────────────────────
+       NAV / HAMBURGER
+    ───────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      background: none;
+      border: none;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      transition: all 0.35s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media(max-width:900px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 22, 40, 0.98);
+        backdrop-filter: blur(16px);
+        padding: 18px 24px 24px;
+        gap: 4px;
+        transform: translateY(-110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
+        z-index: 999;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+      }
+
+      .nav-cta {
+        margin-top: 8px;
+        text-align: center;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .service-hero {
+      min-height: 560px;
+      background: linear-gradient(135deg, #060e1f 0%, #0f1c38 45%, #0a1525 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(232, 114, 30, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 114, 30, 0.07) 1px, transparent 1px);
+      background-size: 52px 52px;
+      animation: gridShift 18s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 52px 52px;
+      }
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.18), transparent 65%);
+      top: -180px;
+      right: -120px;
+      animation: orbPulse 6s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(44, 62, 107, 0.7), transparent 70%);
+      bottom: -80px;
+      left: -80px;
+    }
+
+    .hero-orb-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.1), transparent 70%);
+      top: 50%;
+      left: 38%;
+      transform: translate(-50%, -50%);
+      animation: orbPulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .8;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+    .service-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--orange);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb .current {
+      color: var(--orange);
+    }
+
+    .service-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 114, 30, 0.12);
+      border: 1px solid rgba(232, 114, 30, 0.4);
+      color: var(--orange);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+      box-shadow: 0 0 6px var(--orange);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+
+    /* FIXED: hero headline — no class conflict with .service-hero */
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+    }
+
+    .hero-headline em::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 2px;
+    }
+
+    .service-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 36px;
+    }
+
+    /* Hero stat pills */
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 8px 16px;
+      transition: all 0.3s;
+    }
+
+    .hero-stat-pill:hover {
+      border-color: rgba(232, 114, 30, 0.4);
+      background: rgba(232, 114, 30, 0.08);
+    }
+
+    .hero-stat-pill .pill-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(232, 114, 30, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-stat-pill .pill-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-stat-pill .pill-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .hero-stat-pill .pill-lbl {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Visual card */
+    .hero-visual-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 22px;
+      padding: 20px;
+      width: 360px;
+      flex-shrink: 0;
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 0 1px rgba(232, 114, 30, 0.06);
+      animation: cardFloat 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .hero-visual-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(232, 114, 30, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes cardFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .card-live-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 200, 100, 0.15);
+      border: 1px solid rgba(0, 200, 100, 0.4);
+      color: #00c864;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .card-live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00c864;
+      animation: blink 1.2s ease-in-out infinite;
+      box-shadow: 0 0 5px #00c864;
+    }
+
+    /* Call wave animation */
+    .call-ring {
+      animation: callRing 2s ease-in-out infinite;
+      transform-origin: 80px 90px;
+    }
+
+    @keyframes callRing {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+
+    .call-ring-2 {
+      animation-delay: 0.4s;
+    }
+
+    .call-ring-3 {
+      animation-delay: 0.8s;
+    }
+
+    /* Data packet travel */
+    .data-packet {
+      animation: packetTravel 3s linear infinite;
+    }
+
+    .data-packet-2 {
+      animation-delay: 1s;
+    }
+
+    .data-packet-3 {
+      animation-delay: 2s;
+    }
+
+    @keyframes packetTravel {
+      0% {
+        transform: translateX(-60px);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(60px);
+        opacity: 0;
+      }
+    }
+
+    @media(max-width:960px) {
+      .service-hero-content {
+        grid-template-columns: 1fr;
+        padding: 70px 24px;
+      }
+
+      .hero-visual-card {
+        display: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .service-hero-content {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav>
+    <div class="nav-logo">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#about">About Us</a></li>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../index.html#sectors">Sectors</a></li>
+      <li><a href="../index.html#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="service-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="service-hero-content">
+
+      <!-- LEFT: Text -->
+      <div class="service-hero-text">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="../index.html#services">Services</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="current">IP PABX</span>
+        </nav>
+
+        <div class="service-hero-badge">
+          <div class="badge-dot"></div>
+          Communication Systems
+        </div>
+
+        <!-- FIXED: .hero-headline — no conflict with .service-hero -->
+        <h1 class="hero-headline">
+          Smart Calls.<br>
+          <em>Zero Wasted Cost.</em>
+        </h1>
+
+        <p class="service-hero-sub">
+          Modern VoIP-powered communication infrastructure that connects your entire organisation —
+          crystal-clear HD calls, intelligent routing, and scalable architecture that cuts your
+          phone bill by up to 60%.
+        </p>
+
+        <!-- Stat pills -->
+        <div class="hero-stats">
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                <polyline points="17 6 23 6 23 12" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">60%</div>
+              <div class="pill-lbl">Cost Saving</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">HD Voice</div>
+              <div class="pill-lbl">Crystal Clear</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">∞</div>
+              <div class="pill-lbl">Extensions</div>
+            </div>
+          </div>
+          <div class="hero-stat-pill">
+            <div class="pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div>
+              <div class="pill-val">Multi-Site</div>
+              <div class="pill-lbl">One System</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Animated IP PABX SVG Illustration -->
+      <div class="hero-visual-card">
+        <div class="card-live-badge">System Online</div>
+
+        <svg class="hero-illustration" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Background panel -->
+          <rect x="14" y="14" width="292" height="252" rx="18" fill="rgba(255,255,255,0.025)"
+            stroke="rgba(255,255,255,0.07)" stroke-width="1" />
+
+          <!-- ── Top status bar ── -->
+          <rect x="30" y="22" width="260" height="18" rx="5" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+          <circle cx="44" cy="31" r="4" fill="#00c864" opacity="0.9" />
+          <circle cx="44" cy="31" r="0" fill="#00c864">
+            <animate attributeName="r" values="4;9;4" dur="2.5s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite" />
+          </circle>
+          <rect x="54" y="27" width="44" height="8" rx="2" fill="rgba(0,200,100,0.25)" />
+          <rect x="104" y="27" width="32" height="8" rx="2" fill="rgba(255,255,255,0.1)" />
+          <rect x="142" y="27" width="50" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+          <rect x="198" y="27" width="38" height="8" rx="2" fill="rgba(232,114,30,0.2)" />
+          <rect x="242" y="27" width="28" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+
+          <!-- ── PABX Server / PBX Unit ── -->
+          <rect x="110" y="50" width="100" height="62" rx="10" fill="rgba(26,40,80,0.95)" stroke="rgba(232,114,30,0.4)"
+            stroke-width="1.5" />
+          <!-- Server face -->
+          <rect x="116" y="56" width="88" height="50" rx="6" fill="rgba(15,28,58,0.9)" />
+          <!-- Server label -->
+          <rect x="120" y="60" width="48" height="6" rx="2" fill="rgba(232,114,30,0.5)" />
+          <!-- Drive bays -->
+          <rect x="120" y="70" width="80" height="6" rx="2" fill="rgba(255,255,255,0.06)"
+            stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
+          <rect x="120" y="79" width="80" height="6" rx="2" fill="rgba(255,255,255,0.06)"
+            stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
+          <rect x="120" y="88" width="80" height="6" rx="2" fill="rgba(255,255,255,0.06)"
+            stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
+          <!-- Power LEDs row -->
+          <circle cx="176" cy="63" r="2.5" fill="#00c864" opacity="0.9">
+            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="184" cy="63" r="2.5" fill="#00c864" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" begin="0.4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="192" cy="63" r="2.5" fill="rgba(232,114,30,0.8)">
+            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <!-- "PABX" chip -->
+          <rect x="122" y="98" width="22" height="4" rx="1" fill="rgba(232,114,30,0.3)" />
+
+          <!-- ── Network switch beneath server ── -->
+          <rect x="122" y="122" width="76" height="22" rx="5" fill="rgba(44,62,107,0.7)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1" />
+          <!-- Port dots -->
+          <circle cx="132" cy="133" r="2.5" fill="rgba(0,200,100,0.7)" />
+          <circle cx="140" cy="133" r="2.5" fill="rgba(0,200,100,0.7)" />
+          <circle cx="148" cy="133" r="2.5" fill="rgba(0,200,100,0.7)" />
+          <circle cx="156" cy="133" r="2.5" fill="rgba(255,255,255,0.3)" />
+          <circle cx="164" cy="133" r="2.5" fill="rgba(0,200,100,0.7)" />
+          <circle cx="172" cy="133" r="2.5" fill="rgba(255,255,255,0.2)" />
+          <circle cx="180" cy="133" r="2.5" fill="rgba(232,114,30,0.6)" />
+          <circle cx="188" cy="133" r="2.5" fill="rgba(0,200,100,0.7)" />
+
+          <!-- Connecting lines: server → switch -->
+          <line x1="160" y1="112" x2="160" y2="122" stroke="rgba(232,114,30,0.4)" stroke-width="1.5"
+            stroke-dasharray="2 2" />
+
+          <!-- ── Desk phones (left and right) ── -->
+          <!-- Phone Left -->
+          <rect x="32" y="64" width="58" height="44" rx="8" fill="rgba(26,40,80,0.9)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1" />
+          <!-- Phone screen -->
+          <rect x="37" y="68" width="38" height="18" rx="3" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
+          <!-- Screen content: active call indicator -->
+          <rect x="40" y="71" width="20" height="4" rx="1" fill="rgba(0,200,100,0.5)" />
+          <rect x="40" y="78" width="28" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <!-- Keypad -->
+          <circle cx="42" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="49" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="56" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="63" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="70" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="77" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <!-- Active call ring waves -->
+          <circle cx="61" cy="76" r="0" fill="none" stroke="rgba(0,200,100,0.6)" stroke-width="1" class="call-ring">
+            <animate attributeName="r" values="4;12;4" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <!-- Ext label -->
+          <rect x="37" y="105" width="22" height="4" rx="1" fill="rgba(232,114,30,0.4)" />
+
+          <!-- Phone Right -->
+          <rect x="230" y="64" width="58" height="44" rx="8" fill="rgba(26,40,80,0.9)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1" />
+          <rect x="235" y="68" width="38" height="18" rx="3" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
+          <rect x="238" y="71" width="20" height="4" rx="1" fill="rgba(232,114,30,0.4)" />
+          <rect x="238" y="78" width="28" height="3" rx="1" fill="rgba(255,255,255,0.2)" />
+          <circle cx="240" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="247" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="254" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="261" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="268" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <circle cx="275" cy="94" r="2" fill="rgba(255,255,255,0.3)" />
+          <rect x="235" y="105" width="22" height="4" rx="1" fill="rgba(44,62,107,0.7)" />
+
+          <!-- ── VoIP data packets travelling between phones ── -->
+          <!-- Left to server wire -->
+          <line x1="90" y1="86" x2="110" y2="86" stroke="rgba(232,114,30,0.2)" stroke-width="1" />
+          <!-- Animated data packet left→server -->
+          <circle cx="90" cy="86" r="3" fill="rgba(232,114,30,0.8)" class="data-packet">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0s">
+              <mpath>
+                <path d="M0,0 L20,0" id="pathL" />
+              </mpath>
+            </animateMotion>
+          </circle>
+          <!-- Right to server wire -->
+          <line x1="210" y1="86" x2="230" y2="86" stroke="rgba(232,114,30,0.2)" stroke-width="1" />
+
+          <!-- ── Mobile softphone ── -->
+          <rect x="52" y="158" width="36" height="60" rx="8" fill="rgba(26,40,80,0.9)" stroke="rgba(255,255,255,0.1)"
+            stroke-width="1" />
+          <rect x="55" y="162" width="30" height="40" rx="4" fill="rgba(232,114,30,0.08)" stroke="rgba(232,114,30,0.2)"
+            stroke-width="1" />
+          <!-- App screen: softphone UI -->
+          <rect x="58" y="165" width="24" height="4" rx="1" fill="rgba(0,200,100,0.5)" />
+          <rect x="58" y="172" width="14" height="3" rx="1" fill="rgba(255,255,255,0.25)" />
+          <rect x="58" y="178" width="20" height="3" rx="1" fill="rgba(255,255,255,0.15)" />
+          <!-- Dial button -->
+          <circle cx="70" cy="192" r="6" fill="rgba(0,200,100,0.2)" stroke="rgba(0,200,100,0.5)" stroke-width="1" />
+          <path d="M67.5 191 Q70 188 72.5 191 Q70 196 70 196 Q70 196 67.5 191 Z" fill="rgba(0,200,100,0.8)" />
+          <!-- Home button -->
+          <circle cx="70" cy="212" r="3" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.15)"
+            stroke-width="1" />
+          <!-- Mobile label -->
+          <rect x="56" y="222" width="24" height="4" rx="1" fill="rgba(232,114,30,0.3)" />
+
+          <!-- ── IVR / Auto-Attendant box ── -->
+          <rect x="116" y="158" width="88" height="70" rx="8" fill="rgba(26,40,80,0.85)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
+          <rect x="122" y="163" width="40" height="5" rx="2" fill="rgba(232,114,30,0.5)" />
+          <rect x="122" y="173" width="76" height="2" rx="1" fill="rgba(255,255,255,0.06)" />
+          <!-- IVR menu tree -->
+          <circle cx="160" cy="182" r="5" fill="rgba(232,114,30,0.15)" stroke="rgba(232,114,30,0.4)" stroke-width="1" />
+          <rect x="158" y="180" width="4" height="4" rx="1" fill="rgba(232,114,30,0.6)" />
+          <!-- Branches -->
+          <line x1="156" y1="187" x2="140" y2="197" stroke="rgba(232,114,30,0.3)" stroke-width="1" />
+          <line x1="160" y1="187" x2="160" y2="197" stroke="rgba(232,114,30,0.3)" stroke-width="1" />
+          <line x1="164" y1="187" x2="180" y2="197" stroke="rgba(232,114,30,0.3)" stroke-width="1" />
+          <!-- Branch nodes -->
+          <circle cx="140" cy="200" r="4" fill="rgba(44,62,107,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <rect x="137" y="198" width="6" height="4" rx="1" fill="rgba(255,255,255,0.3)" />
+          <circle cx="160" cy="200" r="4" fill="rgba(44,62,107,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <rect x="157" y="198" width="6" height="4" rx="1" fill="rgba(255,255,255,0.3)" />
+          <circle cx="180" cy="200" r="4" fill="rgba(44,62,107,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <rect x="177" y="198" width="6" height="4" rx="1" fill="rgba(255,255,255,0.3)" />
+          <!-- IVR labels -->
+          <rect x="126" y="208" width="12" height="4" rx="1" fill="rgba(255,255,255,0.12)" />
+          <rect x="153" y="208" width="14" height="4" rx="1" fill="rgba(255,255,255,0.12)" />
+          <rect x="174" y="208" width="16" height="4" rx="1" fill="rgba(255,255,255,0.12)" />
+          <!-- IVR title -->
+          <rect x="168" y="163" width="28" height="5" rx="2" fill="rgba(0,200,100,0.2)" />
+
+          <!-- ── Cloud / remote worker ── -->
+          <rect x="232" y="158" width="72" height="70" rx="8" fill="rgba(26,40,80,0.85)" stroke="rgba(255,255,255,0.08)"
+            stroke-width="1" />
+          <!-- Cloud shape -->
+          <path
+            d="M256 188 Q252 182 258 178 Q258 172 266 172 Q274 172 276 178 Q282 178 282 184 Q282 190 276 190 L256 190 Q252 194 252 190 Q248 186 256 188 Z"
+            fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.35)" stroke-width="1" />
+          <!-- Upload/download arrows -->
+          <path d="M264 183 L268 178 L272 183" stroke="rgba(0,200,100,0.7)" stroke-width="1.3" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+          <line x1="268" y1="178" x2="268" y2="188" stroke="rgba(0,200,100,0.7)" stroke-width="1.3"
+            stroke-linecap="round" />
+          <!-- Remote label -->
+          <rect x="238" y="163" width="36" height="5" rx="2" fill="rgba(44,62,107,0.8)" />
+          <rect x="240" y="166" width="24" height="2" rx="1" fill="rgba(255,255,255,0.3)" />
+          <rect x="238" y="196" width="56" height="4" rx="1" fill="rgba(255,255,255,0.06)" />
+          <rect x="238" y="204" width="40" height="4" rx="1" fill="rgba(255,255,255,0.06)" />
+          <!-- Wifi signal -->
+          <path d="M262 215 Q268 210 274 215" stroke="rgba(232,114,30,0.5)" stroke-width="1.2" fill="none"
+            stroke-linecap="round" />
+          <path d="M259 218 Q268 212 277 218" stroke="rgba(232,114,30,0.3)" stroke-width="1" fill="none"
+            stroke-linecap="round" />
+          <circle cx="268" cy="219" r="2" fill="rgba(232,114,30,0.7)" />
+
+          <!-- ── Connecting lines (switch → endpoints) ── -->
+          <!-- Switch → left phone wire hint -->
+          <line x1="122" y1="133" x2="80" y2="133" stroke="rgba(255,255,255,0.06)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <line x1="80" y1="133" x2="80" y2="108" stroke="rgba(255,255,255,0.06)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <!-- Switch → right phone wire hint -->
+          <line x1="198" y1="133" x2="242" y2="133" stroke="rgba(255,255,255,0.06)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <line x1="242" y1="133" x2="242" y2="108" stroke="rgba(255,255,255,0.06)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <!-- Switch → IVR -->
+          <line x1="160" y1="144" x2="160" y2="158" stroke="rgba(232,114,30,0.2)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <!-- Switch → mobile (left side) -->
+          <line x1="130" y1="144" x2="70" y2="158" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+            stroke-dasharray="3 3" />
+          <!-- Switch → cloud (right side) -->
+          <line x1="190" y1="144" x2="268" y2="158" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+            stroke-dasharray="3 3" />
+
+          <!-- Animated packets on main trunk -->
+          <circle r="3" fill="rgba(232,114,30,0.85)">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0s">
+              <mpath href="#trunkPath" />
+            </animateMotion>
+          </circle>
+          <circle r="3" fill="rgba(0,200,100,0.7)">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0.7s">
+              <mpath href="#trunkPath" />
+            </animateMotion>
+          </circle>
+          <circle r="3" fill="rgba(255,255,255,0.4)">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="1.4s">
+              <mpath href="#trunkPath" />
+            </animateMotion>
+          </circle>
+          <!-- Hidden trunk path: left phone → server → right phone -->
+          <path id="trunkPath" d="M61 86 L110 81 L210 81 L249 86" fill="none" stroke="none" />
+
+          <!-- ── Shield corner ── -->
+          <circle cx="285" cy="50" r="18" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)" stroke-width="1" />
+          <path d="M285 41 c-5 0 -8 3.5 -8 8 v4.5 c0 5 3.5 7.5 8 9.5 c4.5-2 8-4.5 8-9.5 v-4.5 c0-4.5 -3-8 -8-8 z"
+            stroke="rgba(232,114,30,0.85)" stroke-width="1.4" fill="rgba(232,114,30,0.18)" />
+          <path d="M282 51 l2.5 2.5 l5-5" stroke="rgba(232,114,30,0.9)" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+
+        </svg>
+      </div><!-- /hero-visual-card -->
+
+    </div>
+  </section>
+  <!-- END HERO -->
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-text">
+      Cut communication costs by up to 60%.
+      <span>Get a free telephony consultation today.</span>
+    </div>
+    <a href="../index.html#contact" class="cta-strip-btn">Request Free Consultation →</a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="overview-section">
+    <div class="container">
+      <div class="overview-grid">
+        <div class="overview-text reveal">
+          <p class="section-tag">What We Provide</p>
+          <h2 class="section-title">Your Business <span>Communication Backbone</span></h2>
+          <p>SecureHub's IP PABX solutions replace outdated, costly traditional phone systems with intelligent,
+            software-driven telephony that runs over your existing IP network. Eliminate expensive individual phone
+            lines while connecting every desk, department, and location under one unified system.</p>
+          <p>Whether you need 10 extensions or 1,000, on-premise hardware or a cloud-hosted PBX, we design and deploy
+            the right solution — then back it up with comprehensive ongoing support.</p>
+          <div class="overview-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>VoIP & SIP Trunk Integration</h4>
+                <p>Connect to any SIP provider for dramatically lower call costs vs traditional PSTN lines — local and
+                  international.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Auto-Attendant & IVR</h4>
+                <p>Professional automated greetings and multi-level menu routing that presents the right image for your
+                  business 24/7.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <h4>Unlimited Free Internal Calls</h4>
+                <p>Inter-extension calling across all your offices and sites — at absolutely zero per-call cost,
+                  including branch-to-branch.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overview-stats reveal">
+          <div class="stat-card"><span class="stat-num">60%</span><span class="stat-label">Average Cost Reduction</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-card"><span class="stat-num">HD</span><span class="stat-label">Voice Quality</span></div>
+            <div class="stat-card"><span class="stat-num">∞</span><span class="stat-label">Internal Extensions</span>
+            </div>
+          </div>
+          <div class="stat-card"><span class="stat-num">Multi</span><span class="stat-label">-Site Single System</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Core Capabilities</p>
+        <h2 class="section-title">Powerful <span>Communication Features</span></h2>
+        <p class="section-sub">Everything your business needs to communicate professionally, efficiently, and
+          cost-effectively.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
+            </svg>
+          </div>
+          <h4>IP & Analogue Desk Phones</h4>
+          <p>HD-voice SIP desk phones, softphones for PCs, and legacy analogue phone support via FXS gateways — all on
+            one system.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="17 1 21 5 17 9" />
+              <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+              <polyline points="7 23 3 19 7 15" />
+              <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+            </svg>
+          </div>
+          <h4>Call Routing & Hunt Groups</h4>
+          <p>Ring groups, sequential and simultaneous hunting, and overflow routing to ensure no call is ever missed —
+            day or night.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h4>Auto-Attendant & IVR Menus</h4>
+          <p>Multi-level IVR with custom greetings, time-of-day routing, holiday schedules, and department-based call
+            distribution.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <h4>Voicemail to Email</h4>
+          <p>Missed voicemails automatically transcribed and forwarded to your email as audio attachments — never miss a
+            message again.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h4>Call Recording & Reporting</h4>
+          <p>On-demand or automatic call recording with searchable logs — ideal for compliance, quality monitoring,
+            training, and dispute resolution.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h4>Conference Bridge & Video</h4>
+          <p>Built-in multi-party audio conferencing and video platform integration — host professional meetings without
+            third-party subscriptions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag" style="color:var(--orange)">How It Works</p>
+        <h2 class="section-title">Smooth <span>Migration & Deployment</span></h2>
+        <p class="section-sub">We handle the full transition from your existing phone system with zero downtime.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">1</div>
+          <div class="step-title">Communication Audit</div>
+          <div class="step-desc">We review your current setup, call volumes, extension requirements, and SIP trunk
+            options to build the right plan.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">2</div>
+          <div class="step-title">System Design</div>
+          <div class="step-desc">PABX platform selection, extension planning, SIP trunk provisioning, and IVR scripting
+            tailored to your workflow.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">3</div>
+          <div class="step-title">Installation</div>
+          <div class="step-desc">Server or cloud deployment, IP phone provisioning, cable infrastructure, and full
+            number porting from your existing provider.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">4</div>
+          <div class="step-title">Training & AMC</div>
+          <div class="step-desc">Staff training on all phone features, softphone setup, and ongoing AMC support to keep
+            your communications running.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Who We Serve</p>
+        <h2 class="section-title">Built for <span>Every Business</span></h2>
+      </div>
+      <div class="industries-grid reveal">
+        <div class="industry-chip"><span>🏢</span> Corporate Offices</div>
+        <div class="industry-chip"><span>🏨</span> Hotels & Hospitality</div>
+        <div class="industry-chip"><span>🏥</span> Hospitals & Clinics</div>
+        <div class="industry-chip"><span>🏫</span> Schools & Universities</div>
+        <div class="industry-chip"><span>🏭</span> Industrial Facilities</div>
+        <div class="industry-chip"><span>🛍️</span> Retail & Call Centres</div>
+        <div class="industry-chip"><span>🏛️</span> Government Buildings</div>
+        <div class="industry-chip"><span>🏗️</span> Real Estate & Developers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-tag">Common Questions</p>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can I keep my existing phone numbers?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. We handle full number porting from your existing telecom provider to our SIP trunk, ensuring your
+              business numbers remain unchanged with no interruption to incoming calls during the transition.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What is the difference between on-premise and cloud PABX?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>On-premise PABX hosts the server in your office for maximum control and no monthly recurring fees. Cloud
+              PABX is hosted by us — requires no hardware on your side and allows employees to use the system from
+              anywhere. We recommend the best option based on your team size, budget, and remote work requirements.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can remote and mobile workers use the system?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Absolutely. Our IP PABX systems include softphone apps for iOS, Android, and desktop — so remote staff
+              get a full office phone extension on their personal device, including internal dialling, call transfers,
+              and professional IVR handling.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>How much can we save vs our current phone system?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Most businesses save 40–60% on their monthly phone bills by switching to VoIP. Savings come from
+              eliminating individual PSTN lines, reducing long-distance call costs significantly, and making all
+              internal and inter-branch calls completely free.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Will it work if the internet goes down?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <p>Yes. We can configure failover routing to automatically redirect calls to mobile numbers or a secondary
+              connection if your primary internet link goes down — ensuring business continuity and uninterrupted call
+              handling at all times.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content reveal">
+      <h2>Upgrade Your Business <span>Communications</span></h2>
+      <p>Let our telephony experts design a modern, cost-effective IP PABX system that connects your entire organisation
+        and significantly cuts your monthly phone bill.</p>
+      <div class="cta-buttons">
+        <a href="../index.html#contact" class="btn-primary">Get a Free Quote →</a>
+        <a href="tel:+971562914955" class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Speak to an Expert
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-left">
+      <a href="../index.html"><img src="../src/images/securehub-logo.png" alt="SecureHub"></a>
+    </div>
+    <div class="footer-links">
+      <a href="cctv-surveillance.html">CCTV</a>
+      <a href="structured-cabling.html">Cabling</a>
+      <a href="access-control.html">Access Control</a>
+      <a href="time-attendance.html">Attendance</a>
+      <a href="pa-speaker.html">PA System</a>
+    </div>
+    <div class="footer-right">© 2026 <span>SecureHub Smart Vision Technology</span>. Abu Dhabi, UAE.</div>
+  </footer>
+
+  <!-- FLOATING CALL BUTTON -->
+  <a href="tel:+971562914955" class="phone-float" aria-label="Call us">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
+    </svg>
+  </a>
+
+  <script>
+    /* ── FAQ toggle (accordion) ── */
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── Hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    });
+
+    /* ── Nav scroll shadow ── */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,0.4)' : 'none';
+    });
+  </script>
+
+</body>
+
+</html>
