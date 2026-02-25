@@ -75,7 +75,7 @@ window.submitForm = function () {
   }
 
   // EmailJS send
-  emailjs.send("service_gfyjzlr", "template_8ew6p74", {
+  emailjs.send("service_0tmsxbc", "template_wx6c9p6", {
     name : name,
     phone     : phone,
     email  : email,
