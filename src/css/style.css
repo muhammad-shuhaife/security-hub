@@ -1613,38 +1613,36 @@ footer {
   .hero-content {
     grid-template-columns: 1fr;
   }
-  
+
   .about-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .why-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .contact-wrapper {
     grid-template-columns: 1fr;
   }
-  
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .clients-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   nav {
     padding: 0 20px;
   }
-  
-  .nav-links {
-    display: none;
-  }
+
+  /* nav-links is handled by the smart nav block below — do NOT set display:none here */
 }
 
 @media (max-width: 768px) {

@@ -2,7 +2,7 @@
 
 /* ── Smart Nav ── */
 (function () {
-  const nav = document.querySelector('nav');
+  const navEl = document.querySelector('nav');
   let prevY = 0;
 
   window.addEventListener('scroll', function () {
@@ -10,18 +10,18 @@
 
     if (currY < 80) {
       // At the very top — always show, clean state
-      nav.classList.remove('nav--hidden');
-      nav.classList.remove('nav--scrolled');
+      navEl.classList.remove('nav--hidden');
+      navEl.classList.remove('nav--scrolled');
 
     } else if (currY > prevY) {
       // Scrolling DOWN — hide
-      nav.classList.add('nav--scrolled');
-      nav.classList.add('nav--hidden');
+      navEl.classList.add('nav--scrolled');
+      navEl.classList.add('nav--hidden');
 
     } else {
       // Scrolling UP — show
-      nav.classList.add('nav--scrolled');
-      nav.classList.remove('nav--hidden');
+      navEl.classList.add('nav--scrolled');
+      navEl.classList.remove('nav--hidden');
     }
 
     prevY = currY;
@@ -61,8 +61,8 @@ const cObs = new IntersectionObserver(entries => {
       const step = target / 60;
       const t = setInterval(() => {
         cur += step;
-        if (cur >= target) { 
-          cur = target; 
+        if (cur >= target) {
+          cur = target;
           clearInterval(t);
           e.target.textContent = target + (e.target.dataset.target.includes('%') ? '%' : '+');
         } else {
@@ -82,11 +82,11 @@ const links = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
   let cur = '';
-  secs.forEach(s => { 
-    if (window.scrollY >= s.offsetTop - 100) cur = s.id; 
+  secs.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) cur = s.id;
   });
-  
-  links.forEach(a => { 
+
+  links.forEach(a => {
     if (!a.classList.contains('nav-cta')) {
       a.style.color = (a.getAttribute('href') === '#' + cur) ? '#E8721E' : '';
     }
@@ -94,22 +94,22 @@ window.addEventListener('scroll', () => {
 });
 
 // Form submission function
-window.submitForm = function() {
+window.submitForm = function () {
   const name = document.getElementById('name')?.value || '';
   const phone = document.getElementById('phone')?.value || '';
   const email = document.getElementById('email')?.value || '';
   const service = document.getElementById('service')?.value || '';
   const message = document.getElementById('message')?.value || '';
-  
+
   if (!name || !phone || !email) {
     alert('Please fill in all required fields (Name, Phone, Email)');
     return;
   }
-  
+
   // Here you would typically send the data to your backend
   console.log('Form submitted:', { name, phone, email, service, message });
   alert('Thank you! We will contact you shortly.');
-  
+
   // Clear form
   document.getElementById('name').value = '';
   document.getElementById('phone').value = '';
@@ -120,7 +120,8 @@ window.submitForm = function() {
 
 /* ── Hamburger menu ── */
 const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('navLinks');
+const navLinks = document.getElementById('navLinks');
+const nav = document.querySelector('nav');
 
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');

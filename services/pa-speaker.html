@@ -67,14 +67,19 @@
         backdrop-filter: blur(16px);
         padding: 18px 24px 24px;
         gap: 4px;
-        transform: translateY(-110%);
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
         z-index: 999;
+        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
+        /* Hidden state */
+        transform: translateY(-110%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
       }
 
       .nav-links.open {
         transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
       }
 
       .nav-links li {
@@ -83,13 +88,24 @@
 
       .nav-links a {
         display: block;
-        padding: 12px 16px !important;
+        padding: 13px 16px !important;
         font-size: 0.9rem !important;
+        border-radius: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-links a:hover {
+        background: rgba(232, 114, 30, 0.08);
+      }
+
+      .nav-links li:last-child a {
+        border-bottom: none;
       }
 
       .nav-cta {
-        margin-top: 8px;
-        text-align: center;
+        margin-top: 10px;
+        text-align: center !important;
+        border-bottom: none !important;
       }
     }
 
@@ -513,18 +529,34 @@
 
     @media(max-width:960px) {
       .service-hero-content {
-        grid-template-columns: 1fr;
-        padding: 70px 24px;
+        grid-template-columns: 1fr !important;
+        padding: 70px 24px !important;
+        justify-items: center;
       }
 
       .hero-visual-card {
-        display: none;
+        display: block !important;
+        width: 100% !important;
+        max-width: 340px !important;
+        margin: 24px auto 0 !important;
+      }
+
+      .hero-visual-card svg {
+        width: 100% !important;
+        height: auto !important;
       }
     }
 
     @media(max-width:600px) {
       .service-hero-content {
-        padding: 60px 20px;
+        padding: 60px 20px !important;
+      }
+
+      .hero-visual-card {
+        display: block !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 20px auto 0 !important;
       }
     }
   </style>
@@ -671,8 +703,8 @@
           <rect x="98" y="46" width="124" height="68" rx="10" fill="rgba(26,40,80,0.95)" stroke="rgba(232,114,30,0.4)"
             stroke-width="1.5" />
           <!-- Rack face accent top -->
-          <rect x="98" y="46" width="124" height="4" rx="10 10 0 0" fill="rgba(232,114,30,0.35)" />
-          <!-- Label -->
+          <rect x="98" y="46" width="124" height="4" rx="4" fill="rgba(232,114,30,0.35)" />
+           <!-- Label -->
           <rect x="104" y="54" width="52" height="6" rx="2" fill="rgba(232,114,30,0.5)" />
           <!-- Zone indicators row -->
           <rect x="160" y="54" width="8" height="6" rx="1" fill="rgba(0,200,100,0.6)" />
@@ -1203,6 +1235,14 @@
   </a>
 
   <script>
+    /* ── Close nav on outside click ── */
+    document.addEventListener('click', (e) => {
+      if (!document.querySelector('nav').contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      }
+    });
     /* ── FAQ toggle (accordion) ── */
     function toggleFaq(el) {
       const item = el.parentElement;

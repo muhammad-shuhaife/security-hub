@@ -12,6 +12,9 @@
     /* ─────────────────────────────────────────
        NAV OVERRIDES / HAMBURGER
     ───────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+   NAV OVERRIDES / HAMBURGER
+───────────────────────────────────────── */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -19,35 +22,95 @@
       cursor: pointer;
       padding: 6px;
       border-radius: 6px;
+      background: none;
+      border: none;
       transition: background 0.2s;
+      z-index: 1001;
     }
-    .hamburger:hover { background: rgba(255,255,255,0.06); }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
     .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: rgba(255,255,255,0.8); border-radius: 2px;
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
       transition: all 0.35s;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
 
     @media(max-width:900px) {
-      .hamburger { display: flex; }
+      .hamburger {
+        display: flex;
+      }
+
       .nav-links {
         display: flex !important;
         flex-direction: column;
-        position: fixed; top: 72px; left: 0; right: 0;
-        background: rgba(10,22,40,0.98); backdrop-filter: blur(16px);
-        padding: 18px 24px 24px;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(6, 12, 26, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 18px 24px 28px;
         gap: 4px;
+        z-index: 999;
+        border-bottom: 1px solid rgba(232, 114, 30, 0.2);
+        /* Hidden state */
         transform: translateY(-110%);
-        transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-        border-bottom: 1px solid rgba(232,114,30,0.2);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.3s ease;
       }
-      .nav-links.open { transform: translateY(0); }
-      .nav-links li { width: 100%; }
-      .nav-links a { display: block; padding: 12px 16px !important; font-size: 0.9rem !important; }
-      .nav-cta { margin-top: 8px; text-align: center; }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 13px 16px !important;
+        font-size: 0.9rem !important;
+        border-radius: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-links a:hover {
+        background: rgba(232, 114, 30, 0.08);
+      }
+
+      .nav-links li:last-child a {
+        border-bottom: none;
+      }
+
+      .nav-cta {
+        margin-top: 10px;
+        text-align: center !important;
+        border-bottom: none !important;
+      }
     }
 
     /* ─────────────────────────────────────────
@@ -65,46 +128,81 @@
 
     /* Animated grid */
     .hero-bg-grid {
-      position: absolute; inset: 0; z-index: 0;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
       background-image:
-        linear-gradient(rgba(232,114,30,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,114,30,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(232, 114, 30, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 114, 30, 0.07) 1px, transparent 1px);
       background-size: 52px 52px;
       animation: gridShift 18s linear infinite;
     }
+
     @keyframes gridShift {
-      0%   { background-position: 0 0; }
-      100% { background-position: 52px 52px; }
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 52px 52px;
+      }
     }
 
     /* Orbs */
-    .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
     .hero-orb-1 {
-      width: 620px; height: 620px;
-      background: radial-gradient(circle, rgba(232,114,30,0.18), transparent 65%);
-      top: -180px; right: -120px;
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.18), transparent 65%);
+      top: -180px;
+      right: -120px;
       animation: orbPulse 6s ease-in-out infinite;
     }
+
     .hero-orb-2 {
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, rgba(44,62,107,0.7), transparent 70%);
-      bottom: -80px; left: -80px;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(44, 62, 107, 0.7), transparent 70%);
+      bottom: -80px;
+      left: -80px;
     }
+
     .hero-orb-3 {
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(232,114,30,0.1), transparent 70%);
-      top: 50%; left: 38%; transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 114, 30, 0.1), transparent 70%);
+      top: 50%;
+      left: 38%;
+      transform: translate(-50%, -50%);
       animation: orbPulse 8s ease-in-out infinite reverse;
     }
+
     @keyframes orbPulse {
-      0%,100% { transform: scale(1); opacity:0.8; }
-      50%      { transform: scale(1.12); opacity:1; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
     }
 
     /* Layout */
     .service-hero-content {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 80px 40px;
       display: grid;
       grid-template-columns: 1fr 360px;
@@ -115,30 +213,56 @@
 
     /* Breadcrumb */
     .breadcrumb {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 22px;
-      font-size: 0.78rem; color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
     }
+
     .breadcrumb a {
-      color: rgba(255,255,255,0.45); text-decoration: none;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
       transition: color 0.2s;
     }
-    .breadcrumb a:hover { color: var(--orange); }
-    .breadcrumb-sep { color: rgba(255,255,255,0.2); }
-    .breadcrumb .current { color: var(--orange); }
+
+    .breadcrumb a:hover {
+      color: var(--orange);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb .current {
+      color: var(--orange);
+    }
 
     /* Badge */
     .service-hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(232,114,30,0.12);
-      border: 1px solid rgba(232,114,30,0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 114, 30, 0.12);
+      border: 1px solid rgba(232, 114, 30, 0.4);
       color: var(--orange);
-      padding: 5px 16px; border-radius: 20px;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; margin-bottom: 22px;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
     }
+
     .badge-dot {
-      width: 7px; height: 7px; background: var(--orange); border-radius: 50%;
-      animation: blink 1.5s ease-in-out infinite; box-shadow: 0 0 6px var(--orange);
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+      box-shadow: 0 0 6px var(--orange);
     }
 
     /* Headline — FIXED: use a div or override class to avoid conflict with .service-hero */
@@ -151,118 +275,220 @@
       margin-bottom: 22px;
       letter-spacing: -0.01em;
     }
+
     .hero-headline em {
       font-style: normal;
       color: var(--orange);
       position: relative;
     }
+
     .hero-headline em::after {
       content: '';
       position: absolute;
-      left: 0; bottom: -4px; right: 0; height: 3px;
+      left: 0;
+      bottom: -4px;
+      right: 0;
+      height: 3px;
       background: linear-gradient(90deg, var(--orange), transparent);
       border-radius: 2px;
     }
 
     /* Sub */
     .service-hero-sub {
-      font-size: 1.05rem; color: rgba(255,255,255,0.6);
-      line-height: 1.8; max-width: 580px;
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      max-width: 580px;
       margin-bottom: 36px;
     }
 
     /* Hero stat pills */
     .hero-stats {
-      display: flex; flex-wrap: wrap; gap: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
+
     .hero-stat-pill {
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 50px;
       padding: 8px 16px;
       transition: all 0.3s;
     }
+
     .hero-stat-pill:hover {
-      border-color: rgba(232,114,30,0.4);
-      background: rgba(232,114,30,0.08);
+      border-color: rgba(232, 114, 30, 0.4);
+      background: rgba(232, 114, 30, 0.08);
     }
+
     .hero-stat-pill .pill-icon {
-      width: 28px; height: 28px;
-      background: rgba(232,114,30,0.15);
+      width: 28px;
+      height: 28px;
+      background: rgba(232, 114, 30, 0.15);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .hero-stat-pill .pill-icon svg { width: 14px; height: 14px; }
+
+    .hero-stat-pill .pill-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
     .hero-stat-pill .pill-val {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem; font-weight: 800; color: white;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
     }
+
     .hero-stat-pill .pill-lbl {
-      font-size: 0.72rem; color: rgba(255,255,255,0.45);
-      text-transform: uppercase; letter-spacing: 0.06em;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     /* ── VISUAL CARD ── */
     .hero-visual-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 22px;
       padding: 20px;
       width: 360px;
       flex-shrink: 0;
       backdrop-filter: blur(12px);
       box-shadow:
-        0 24px 70px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.07),
-        0 0 0 1px rgba(232,114,30,0.06);
+        0 24px 70px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 0 1px rgba(232, 114, 30, 0.06);
       animation: cardFloat 4s ease-in-out infinite;
       position: relative;
     }
+
     .hero-visual-card::before {
-      content:'';
-      position:absolute; inset:0; border-radius:22px;
-      background: linear-gradient(135deg, rgba(232,114,30,0.06) 0%, transparent 60%);
-      pointer-events:none;
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(232, 114, 30, 0.06) 0%, transparent 60%);
+      pointer-events: none;
     }
-    .hero-illustration { width:100%; height:auto; display:block; }
-    .rfid-card { animation: rfidFloat 3s ease-in-out infinite; transform-origin: center; }
+
+    .hero-illustration {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .rfid-card {
+      animation: rfidFloat 3s ease-in-out infinite;
+      transform-origin: center;
+    }
 
     @keyframes rfidFloat {
-      0%,100% { transform: translateY(0px) rotate(-3deg); }
-      50%      { transform: translateY(-10px) rotate(-3deg); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(-3deg);
+      }
     }
+
     @keyframes cardFloat {
-      0%,100% { transform: translateY(0px); }
-      50%      { transform: translateY(-8px); }
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
     /* ── "LIVE SYSTEM" badge on card ── */
     .card-live-badge {
-      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-      background: rgba(0,200,100,0.15);
-      border: 1px solid rgba(0,200,100,0.4);
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 200, 100, 0.15);
+      border: 1px solid rgba(0, 200, 100, 0.4);
       color: #00c864;
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 20px;
-      display: flex; align-items: center; gap: 6px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       white-space: nowrap;
     }
+
     .card-live-badge::before {
-      content:''; width:6px; height:6px; border-radius:50%;
-      background:#00c864;
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00c864;
       animation: blink 1.2s ease-in-out infinite;
       box-shadow: 0 0 5px #00c864;
     }
 
     @media(max-width:960px) {
-      .service-hero-content { grid-template-columns:1fr; padding:70px 24px; }
-      .hero-visual-card { display:none; }
+      .service-hero-content {
+        grid-template-columns: 1fr;
+        padding: 70px 24px;
+      }
+
+      /* Show card on tablet — centered */
+      .hero-visual-card {
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+      }
     }
+
     @media(max-width:600px) {
-      .service-hero-content { padding:60px 20px; }
-      .hero-stats { gap:8px; }
+      .service-hero-content {
+        padding: 60px 20px;
+      }
+
+      .hero-stats {
+        gap: 8px;
+      }
+
+      /* Hide card on small phones — too cramped */
+      .hero-visual-card {
+        display: none;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero-visual-card {
+        display: block !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 32px auto 0 !important;
+      }
+
+      .hero-visual-card svg {
+        width: 100% !important;
+        height: auto !important;
+      }
     }
   </style>
 </head>
@@ -332,8 +558,9 @@
         <div class="hero-stats">
           <div class="hero-stat-pill">
             <div class="pill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
             <div>
@@ -343,8 +570,10 @@
           </div>
           <div class="hero-stat-pill">
             <div class="pill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
             <div>
@@ -354,8 +583,10 @@
           </div>
           <div class="hero-stat-pill">
             <div class="pill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
             </div>
             <div>
@@ -365,8 +596,9 @@
           </div>
           <div class="hero-stat-pill">
             <div class="pill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
             <div>
@@ -385,138 +617,141 @@
         <svg class="hero-illustration" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
 
           <!-- Background panel -->
-          <rect x="14" y="14" width="292" height="252" rx="18"
-            fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="14" y="14" width="292" height="252" rx="18" fill="rgba(255,255,255,0.025)"
+            stroke="rgba(255,255,255,0.07)" stroke-width="1" />
 
           <!-- Door frame -->
-          <rect x="105" y="44" width="108" height="170" rx="8"
-            fill="rgba(44,62,107,0.65)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
-          <rect x="111" y="50" width="96" height="158" rx="6"
-            fill="rgba(18,28,55,0.85)"/>
+          <rect x="105" y="44" width="108" height="170" rx="8" fill="rgba(44,62,107,0.65)"
+            stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+          <rect x="111" y="50" width="96" height="158" rx="6" fill="rgba(18,28,55,0.85)" />
           <!-- Door divide line -->
-          <line x1="159" y1="50" x2="159" y2="208" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="159" y1="50" x2="159" y2="208" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
           <!-- Door handle -->
-          <rect x="189" y="124" width="7" height="22" rx="3.5" fill="#E8721E" opacity="0.9"/>
-          <circle cx="192.5" cy="124" r="4" fill="#E8721E"/>
+          <rect x="189" y="124" width="7" height="22" rx="3.5" fill="#E8721E" opacity="0.9" />
+          <circle cx="192.5" cy="124" r="4" fill="#E8721E" />
           <!-- Door bottom rail -->
-          <rect x="111" y="198" width="96" height="10" rx="0 0 6 6"
-            fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <rect x="111" y="198" width="96" height="10" rx="0" fill="rgba(255,255,255,0.03)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
 
           <!-- ── Access Reader Panel ── -->
-          <rect x="52" y="82" width="46" height="78" rx="10"
-            fill="rgba(26,40,80,0.95)" stroke="rgba(232,114,30,0.35)" stroke-width="1.5"/>
+          <rect x="52" y="82" width="46" height="78" rx="10" fill="rgba(26,40,80,0.95)" stroke="rgba(232,114,30,0.35)"
+            stroke-width="1.5" />
           <!-- Reader top accent -->
-          <rect x="52" y="82" width="46" height="4" rx="10 10 0 0" fill="rgba(232,114,30,0.3)"/>
-
+          <rect x="52" y="82" width="46" height="4" rx="4" fill="rgba(232,114,30,0.3)" />
           <!-- Fingerprint screen -->
-          <rect x="57" y="90" width="36" height="26" rx="5"
-            fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)" stroke-width="1"/>
+          <rect x="57" y="90" width="36" height="26" rx="5" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)"
+            stroke-width="1" />
           <!-- Fingerprint arcs -->
-          <path d="M68 113 Q75 104 82 113" stroke="rgba(232,114,30,0.85)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <path d="M70 115 Q75 108 80 115" stroke="rgba(232,114,30,0.85)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <path d="M72.5 117 Q75 113 77.5 117" stroke="rgba(232,114,30,0.85)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <circle cx="75" cy="100" r="1.5" fill="rgba(232,114,30,0.7)"/>
+          <path d="M68 113 Q75 104 82 113" stroke="rgba(232,114,30,0.85)" stroke-width="1.3" fill="none"
+            stroke-linecap="round" />
+          <path d="M70 115 Q75 108 80 115" stroke="rgba(232,114,30,0.85)" stroke-width="1.3" fill="none"
+            stroke-linecap="round" />
+          <path d="M72.5 117 Q75 113 77.5 117" stroke="rgba(232,114,30,0.85)" stroke-width="1.3" fill="none"
+            stroke-linecap="round" />
+          <circle cx="75" cy="100" r="1.5" fill="rgba(232,114,30,0.7)" />
 
           <!-- Scanning sweep line -->
           <rect x="57" y="90" width="36" height="2" rx="1" fill="rgba(232,114,30,0.9)" opacity="0">
-            <animate attributeName="y" values="90;114;90" dur="2.2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="90;114;90" dur="2.2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite" />
           </rect>
 
           <!-- Keypad -->
           <g opacity="0.8">
-            <circle cx="64" cy="130" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="75" cy="130" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="86" cy="130" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="64" cy="141" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="75" cy="141" r="3" fill="rgba(232,114,30,0.95)"/>
-            <circle cx="86" cy="141" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="64" cy="152" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="75" cy="152" r="3" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="86" cy="152" r="3" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="64" cy="130" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="75" cy="130" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="86" cy="130" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="64" cy="141" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="75" cy="141" r="3" fill="rgba(232,114,30,0.95)" />
+            <circle cx="86" cy="141" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="64" cy="152" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="75" cy="152" r="3" fill="rgba(255,255,255,0.35)" />
+            <circle cx="86" cy="152" r="3" fill="rgba(255,255,255,0.35)" />
           </g>
 
           <!-- LED pulse -->
           <circle cx="75" cy="91" r="0" fill="#00c864">
-            <animate attributeName="r" values="0;7;0" dur="2.2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;0.5;0" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="0;7;0" dur="2.2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0.5;0" dur="2.2s" repeatCount="indefinite" />
           </circle>
-          <circle cx="75" cy="91" r="3" fill="#00c864" opacity="0.9"/>
+          <circle cx="75" cy="91" r="3" fill="#00c864" opacity="0.9" />
 
           <!-- RF signal waves -->
-          <path d="M98 130 Q102 130 105 130" stroke="rgba(232,114,30,0.6)" stroke-width="1.5"
-            stroke-linecap="round" stroke-dasharray="2 3">
-            <animate attributeName="opacity" values="0.2;1;0.2" dur="1.5s" repeatCount="indefinite"/>
+          <path d="M98 130 Q102 130 105 130" stroke="rgba(232,114,30,0.6)" stroke-width="1.5" stroke-linecap="round"
+            stroke-dasharray="2 3">
+            <animate attributeName="opacity" values="0.2;1;0.2" dur="1.5s" repeatCount="indefinite" />
           </path>
           <path d="M97 123 C101 117 107 117 105 123" stroke="rgba(232,114,30,0.35)" stroke-width="1" fill="none">
-            <animate attributeName="opacity" values="0.1;0.7;0.1" dur="1.5s" begin="0.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.1;0.7;0.1" dur="1.5s" begin="0.2s" repeatCount="indefinite" />
           </path>
           <path d="M95 137 C100 143 107 143 105 137" stroke="rgba(232,114,30,0.25)" stroke-width="1" fill="none">
-            <animate attributeName="opacity" values="0.05;0.5;0.05" dur="1.5s" begin="0.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.05;0.5;0.05" dur="1.5s" begin="0.4s" repeatCount="indefinite" />
           </path>
 
           <!-- Floating RFID card -->
           <g class="rfid-card">
-            <rect x="188" y="38" width="60" height="38" rx="6"
-              fill="rgba(232,114,30,0.18)" stroke="rgba(232,114,30,0.65)" stroke-width="1.5"/>
+            <rect x="188" y="38" width="60" height="38" rx="6" fill="rgba(232,114,30,0.18)"
+              stroke="rgba(232,114,30,0.65)" stroke-width="1.5" />
             <!-- Chip -->
-            <rect x="194" y="47" width="16" height="12" rx="3" fill="rgba(232,114,30,0.55)"/>
-            <line x1="194" y1="51" x2="210" y2="51" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
-            <line x1="194" y1="55" x2="210" y2="55" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
-            <line x1="197" y1="47" x2="197" y2="59" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
-            <line x1="204" y1="47" x2="204" y2="59" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
+            <rect x="194" y="47" width="16" height="12" rx="3" fill="rgba(232,114,30,0.55)" />
+            <line x1="194" y1="51" x2="210" y2="51" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+            <line x1="194" y1="55" x2="210" y2="55" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+            <line x1="197" y1="47" x2="197" y2="59" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+            <line x1="204" y1="47" x2="204" y2="59" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
             <!-- Card lines -->
-            <line x1="216" y1="49" x2="242" y2="49" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="216" y1="55" x2="238" y2="55" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="216" y1="61" x2="240" y2="61" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="216" y1="49" x2="242" y2="49" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="216" y1="55" x2="238" y2="55" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="216" y1="61" x2="240" y2="61" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"
+              stroke-linecap="round" />
             <!-- RFID symbol -->
-            <path d="M248 50 Q252 57 248 64" stroke="rgba(232,114,30,0.7)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-            <path d="M245 53 Q247 57 245 61" stroke="rgba(232,114,30,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <path d="M248 50 Q252 57 248 64" stroke="rgba(232,114,30,0.7)" stroke-width="1.2" fill="none"
+              stroke-linecap="round" />
+            <path d="M245 53 Q247 57 245 61" stroke="rgba(232,114,30,0.5)" stroke-width="1" fill="none"
+              stroke-linecap="round" />
           </g>
 
           <!-- Top status bar -->
-          <rect x="30" y="22" width="260" height="18" rx="5"
-            fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <rect x="30" y="22" width="260" height="18" rx="5" fill="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.06)" stroke-width="1" />
           <!-- Live dot -->
-          <circle cx="44" cy="31" r="4" fill="#00c864" opacity="0.9"/>
+          <circle cx="44" cy="31" r="4" fill="#00c864" opacity="0.9" />
           <circle cx="44" cy="31" r="0" fill="#00c864">
-            <animate attributeName="r" values="4;9;4" dur="2.5s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="4;9;4" dur="2.5s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite" />
           </circle>
-          <rect x="54" y="27" width="60" height="8" rx="2" fill="rgba(255,255,255,0.14)"/>
-          <rect x="120" y="27" width="34" height="8" rx="2" fill="rgba(0,200,100,0.25)"/>
-          <rect x="160" y="27" width="50" height="8" rx="2" fill="rgba(255,255,255,0.07)"/>
-          <rect x="216" y="27" width="36" height="8" rx="2" fill="rgba(255,255,255,0.07)"/>
+          <rect x="54" y="27" width="60" height="8" rx="2" fill="rgba(255,255,255,0.14)" />
+          <rect x="120" y="27" width="34" height="8" rx="2" fill="rgba(0,200,100,0.25)" />
+          <rect x="160" y="27" width="50" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
+          <rect x="216" y="27" width="36" height="8" rx="2" fill="rgba(255,255,255,0.07)" />
 
           <!-- ── Bottom status cards ── -->
           <!-- Granted -->
-          <rect x="30" y="218" width="124" height="36" rx="8"
-            fill="rgba(0,200,100,0.08)" stroke="rgba(0,200,100,0.3)" stroke-width="1"/>
-          <circle cx="50" cy="236" r="9" fill="rgba(0,200,100,0.15)"/>
-          <path d="M46 236 l3 3 l6-6" stroke="#00c864" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <rect x="64" y="229" width="52" height="6" rx="2" fill="rgba(0,200,100,0.55)"/>
-          <rect x="64" y="239" width="38" height="5" rx="2" fill="rgba(0,200,100,0.25)"/>
+          <rect x="30" y="218" width="124" height="36" rx="8" fill="rgba(0,200,100,0.08)" stroke="rgba(0,200,100,0.3)"
+            stroke-width="1" />
+          <circle cx="50" cy="236" r="9" fill="rgba(0,200,100,0.15)" />
+          <path d="M46 236 l3 3 l6-6" stroke="#00c864" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+            fill="none" />
+          <rect x="64" y="229" width="52" height="6" rx="2" fill="rgba(0,200,100,0.55)" />
+          <rect x="64" y="239" width="38" height="5" rx="2" fill="rgba(0,200,100,0.25)" />
 
           <!-- Denied / pending -->
-          <rect x="162" y="218" width="128" height="36" rx="8"
-            fill="rgba(232,114,30,0.07)" stroke="rgba(232,114,30,0.25)" stroke-width="1"/>
-          <rect x="178" y="228" width="56" height="6" rx="2" fill="rgba(232,114,30,0.4)"/>
-          <rect x="178" y="238" width="40" height="5" rx="2" fill="rgba(232,114,30,0.2)"/>
-          <circle cx="270" cy="236" r="8"
-            fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.4)" stroke-width="1"/>
-          <path d="M267 232 l6 8 M267 240 l6-8" stroke="#E8721E" stroke-width="1.5"
-            stroke-linecap="round" fill="none">
-            <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
+          <rect x="162" y="218" width="128" height="36" rx="8" fill="rgba(232,114,30,0.07)"
+            stroke="rgba(232,114,30,0.25)" stroke-width="1" />
+          <rect x="178" y="228" width="56" height="6" rx="2" fill="rgba(232,114,30,0.4)" />
+          <rect x="178" y="238" width="40" height="5" rx="2" fill="rgba(232,114,30,0.2)" />
+          <circle cx="270" cy="236" r="8" fill="rgba(232,114,30,0.12)" stroke="rgba(232,114,30,0.4)" stroke-width="1" />
+          <path d="M267 232 l6 8 M267 240 l6-8" stroke="#E8721E" stroke-width="1.5" stroke-linecap="round" fill="none">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite" />
           </path>
 
           <!-- Shield corner accent -->
-          <circle cx="285" cy="50" r="18"
-            fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)" stroke-width="1"/>
+          <circle cx="285" cy="50" r="18" fill="rgba(232,114,30,0.1)" stroke="rgba(232,114,30,0.25)" stroke-width="1" />
           <path d="M285 41 c-5 0 -8 3.5 -8 8 v4.5 c0 5 3.5 7.5 8 9.5 c4.5-2 8-4.5 8-9.5 v-4.5 c0-4.5 -3-8 -8-8 z"
-            stroke="rgba(232,114,30,0.85)" stroke-width="1.4" fill="rgba(232,114,30,0.18)"/>
-          <path d="M282 51 l2.5 2.5 l5-5" stroke="rgba(232,114,30,0.9)" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            stroke="rgba(232,114,30,0.85)" stroke-width="1.4" fill="rgba(232,114,30,0.18)" />
+          <path d="M282 51 l2.5 2.5 l5-5" stroke="rgba(232,114,30,0.9)" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
 
         </svg>
       </div>
@@ -550,8 +785,9 @@
           <div class="overview-highlights">
             <div class="highlight-item">
               <div class="highlight-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
               <div class="highlight-text">
@@ -561,8 +797,9 @@
             </div>
             <div class="highlight-item">
               <div class="highlight-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
               <div class="highlight-text">
@@ -572,8 +809,9 @@
             </div>
             <div class="highlight-item">
               <div class="highlight-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8721E"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
               <div class="highlight-text">
@@ -584,12 +822,15 @@
           </div>
         </div>
         <div class="overview-stats reveal">
-          <div class="stat-card"><span class="stat-num">Multi</span><span class="stat-label">-Site Management</span></div>
+          <div class="stat-card"><span class="stat-num">Multi</span><span class="stat-label">-Site Management</span>
+          </div>
           <div class="stat-row">
             <div class="stat-card"><span class="stat-num">Real</span><span class="stat-label">-Time Alerts</span></div>
-            <div class="stat-card"><span class="stat-num">99.9%</span><span class="stat-label">Read Accuracy</span></div>
+            <div class="stat-card"><span class="stat-num">99.9%</span><span class="stat-label">Read Accuracy</span>
+            </div>
           </div>
-          <div class="stat-card"><span class="stat-num">GDPR</span><span class="stat-label">Compliant Data Handling</span></div>
+          <div class="stat-card"><span class="stat-num">GDPR</span><span class="stat-label">Compliant Data
+              Handling</span></div>
         </div>
       </div>
     </div>
@@ -606,8 +847,9 @@
       <div class="features-grid">
         <div class="feature-card reveal">
           <div class="feature-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
           <h4>Biometric Door Controllers</h4>
@@ -615,57 +857,67 @@
         </div>
         <div class="feature-card reveal">
           <div class="feature-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
           </div>
           <h4>Electric Locks & Strikes</h4>
-          <p>Magnetic locks, electric strikes, and automatic door openers integrated with fail-safe/fail-secure logic.</p>
+          <p>Magnetic locks, electric strikes, and automatic door openers integrated with fail-safe/fail-secure logic.
+          </p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2"/>
-              <line x1="8" y1="21" x2="16" y2="21"/>
-              <line x1="12" y1="17" x2="12" y2="21"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
             </svg>
           </div>
           <h4>Access Management Software</h4>
-          <p>Web-based or on-premise software to assign permissions by role, time zone, and location with full audit trails.</p>
+          <p>Web-based or on-premise software to assign permissions by role, time zone, and location with full audit
+            trails.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="23 7 16 12 23 17 23 7"/>
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="23 7 16 12 23 17 23 7" />
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
             </svg>
           </div>
           <h4>Video Intercom & Video Door Phone</h4>
-          <p>IP video intercoms allowing visual identity verification before granting entry — integrated with your CCTV.</p>
+          <p>IP video intercoms allowing visual identity verification before granting entry — integrated with your CCTV.
+          </p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-              <line x1="6" y1="1" x2="6" y2="4"/>
-              <line x1="10" y1="1" x2="10" y2="4"/>
-              <line x1="14" y1="1" x2="14" y2="4"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="1" x2="6" y2="4" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="14" y1="1" x2="14" y2="4" />
             </svg>
           </div>
           <h4>Emergency Override & Mustering</h4>
-          <p>Instant lockdown or unlock commands for emergency situations with mustering reports for evacuation management.</p>
+          <p>Instant lockdown or unlock commands for emergency situations with mustering reports for evacuation
+            management.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
             </svg>
           </div>
           <h4>Time-Based Access Scheduling</h4>
-          <p>Automate door locking schedules based on business hours, shifts, and holidays with calendar-based rules.</p>
+          <p>Automate door locking schedules based on business hours, shifts, and holidays with calendar-based rules.
+          </p>
         </div>
       </div>
     </div>
@@ -683,17 +935,20 @@
         <div class="process-step reveal">
           <div class="step-num">1</div>
           <div class="step-title">Access Audit</div>
-          <div class="step-desc">We map every entry point, identify security gaps, and define access zones and user roles.</div>
+          <div class="step-desc">We map every entry point, identify security gaps, and define access zones and user
+            roles.</div>
         </div>
         <div class="process-step reveal">
           <div class="step-num">2</div>
           <div class="step-title">System Design</div>
-          <div class="step-desc">Custom controller selection, reader placement, and software configuration for your requirements.</div>
+          <div class="step-desc">Custom controller selection, reader placement, and software configuration for your
+            requirements.</div>
         </div>
         <div class="process-step reveal">
           <div class="step-num">3</div>
           <div class="step-title">Installation</div>
-          <div class="step-desc">Hardware installation and network integration by certified access control engineers.</div>
+          <div class="step-desc">Hardware installation and network integration by certified access control engineers.
+          </div>
         </div>
         <div class="process-step reveal">
           <div class="step-num">4</div>
@@ -738,7 +993,9 @@
             <div class="faq-icon">+</div>
           </div>
           <div class="faq-a">
-            <p>Our systems include UPS battery backup and can be configured as fail-safe (doors unlock on power loss for emergency egress) or fail-secure (doors remain locked) depending on the security requirements of each area.</p>
+            <p>Our systems include UPS battery backup and can be configured as fail-safe (doors unlock on power loss for
+              emergency egress) or fail-secure (doors remain locked) depending on the security requirements of each
+              area.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -747,7 +1004,9 @@
             <div class="faq-icon">+</div>
           </div>
           <div class="faq-a">
-            <p>Yes. We integrate access control with CCTV so that door access events automatically trigger camera recording, making it easy to review exactly who accessed a door and what they did — all from one interface.</p>
+            <p>Yes. We integrate access control with CCTV so that door access events automatically trigger camera
+              recording, making it easy to review exactly who accessed a door and what they did — all from one
+              interface.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -756,7 +1015,9 @@
             <div class="faq-icon">+</div>
           </div>
           <div class="faq-a">
-            <p>Extremely easy. From the management software, you can add, modify, or revoke access for any user in seconds. Credentials are deactivated instantly — no key collection required, making staff offboarding effortless and secure.</p>
+            <p>Extremely easy. From the management software, you can add, modify, or revoke access for any user in
+              seconds. Credentials are deactivated instantly — no key collection required, making staff offboarding
+              effortless and secure.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -765,7 +1026,9 @@
             <div class="faq-icon">+</div>
           </div>
           <div class="faq-a">
-            <p>Absolutely. We specialise in centralised multi-site platforms where all locations are managed from a single cloud or on-premise server, giving security managers complete visibility across all sites simultaneously.</p>
+            <p>Absolutely. We specialise in centralised multi-site platforms where all locations are managed from a
+              single cloud or on-premise server, giving security managers complete visibility across all sites
+              simultaneously.</p>
           </div>
         </div>
       </div>
@@ -776,7 +1039,8 @@
   <section class="final-cta">
     <div class="final-cta-content reveal">
       <h2>Take Control of <span>Every Entry Point</span></h2>
-      <p>Our access control experts will design a system that fits your facility, your people, and your security standards — deployed with zero disruption.</p>
+      <p>Our access control experts will design a system that fits your facility, your people, and your security
+        standards — deployed with zero disruption.</p>
       <div class="cta-buttons">
         <a href="../index.html#contact" class="btn-primary">Get a Free Quote →</a>
         <a href="tel:+971562914955" class="btn-outline"> ask to expert</a>
@@ -801,8 +1065,10 @@
 
   <!-- FLOATING CALL BUTTON -->
   <a href="tel:+971562914955" class="phone-float" aria-label="Call us">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.11-8.62A2 2 0 0 1 3.55 2.33h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z" />
     </svg>
   </a>
 
@@ -817,19 +1083,31 @@
 
     /* ── Hamburger ── */
     const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
+    const navLinks = document.getElementById('navLinks');
+    const navEl = document.querySelector('nav');
+
     hamburger.addEventListener('click', () => {
       const open = hamburger.classList.toggle('open');
       navLinks.classList.toggle('open', open);
       hamburger.setAttribute('aria-expanded', open);
     });
-    // Close nav on link click
+
+    // Close on link click
     navLinks.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         hamburger.classList.remove('open');
         navLinks.classList.remove('open');
         hamburger.setAttribute('aria-expanded', false);
       });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!navEl.contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      }
     });
 
     /* ── Scroll reveal ── */
@@ -853,4 +1131,5 @@
   </script>
 
 </body>
+
 </html>
