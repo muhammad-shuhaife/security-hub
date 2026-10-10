@@ -1865,3 +1865,62 @@ nav.nav--scrolled {
     border-bottom: none !important;
   }
 }
+.phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.phone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 10px;
+  background: #fff;
+  border: 1px solid #e6e6f0;
+  border-radius: 8px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.phone-row:hover {
+  border-color: #f96302;
+  box-shadow: 0 4px 12px rgba(249, 99, 2, .12);
+  transform: translateY(-1px);
+}
+
+.phone-num {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .3px;
+  color: #2a2a6e;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.phone-row:hover .phone-num {
+  color: #f96302;
+}
+
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: #25d366;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.wa-btn:hover {
+  background: #1ebe5a;
+}
+
+@media (max-width: 480px) {
+  .phone-num { font-size: 14px; }
+}
